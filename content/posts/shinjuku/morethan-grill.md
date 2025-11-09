@@ -2,6 +2,7 @@
 id: shinjuku-morethan-grill
 slug: shinjuku/morethan-grill
 title: "新宿の緑を眺める、大人の休日ランチ『MORETHAN GRILL』"
+storeName: 'MORETHAN GRILL'
 date: 2025-11-08
 area: 新宿
 kind: [ダイニングバー, イタリアン]

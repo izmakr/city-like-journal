@@ -2,7 +2,7 @@ import { Post, isPost } from "./types";
 import { readdirSync, readFileSync } from "fs";
 import { join, relative } from "path";
 import matter from "gray-matter";
-import { normalizeKind } from "./postUtils";
+import { normalizeKind, getSortableDateValue, generateStoreNameShort } from "./postUtils";
 import { getAreaGroupName, AREA_GROUP_ORDER } from "./areas";
 
 const POSTS_DIR = join(process.cwd(), "content/posts");
@@ -15,7 +15,16 @@ function parseMarkdownFile(filePath: string, slug: string): Post | null {
 
     const getString = (key: string): string => {
       const value = data[key];
-      return typeof value === 'string' ? value.trim() : '';
+      if (typeof value === 'string') {
+        return value.trim();
+      }
+      if (typeof value === 'number') {
+        return String(value);
+      }
+      if (value instanceof Date) {
+        return value.toISOString();
+      }
+      return '';
     };
 
     const getStringArray = (key: string): string[] => {
@@ -48,6 +57,8 @@ function parseMarkdownFile(filePath: string, slug: string): Post | null {
       id: getString('id') || slug,
       slug: getString('slug') || slug,
       title: getString('title'),
+      storeName: getString('storeName'),
+      storeNameShort: getString('storeNameShort') || undefined,
       date: getString('date'),
       area,
       areaGroup: areaGroup || area,
@@ -60,6 +71,20 @@ function parseMarkdownFile(filePath: string, slug: string): Post | null {
       address: getString('address') || undefined,
       nearestStation,
     } satisfies Partial<Post> & { kind: string[] };
+
+    if (!candidate.storeNameShort) {
+      const generatedShort = generateStoreNameShort(candidate.storeName);
+      if (generatedShort && generatedShort.length < candidate.storeName.length) {
+        candidate.storeNameShort = generatedShort;
+      }
+    }
+
+    if (!candidate.storeName || !candidate.storeName.trim()) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn('Missing required "storeName" in frontmatter', { filePath, candidate });
+      }
+      return null;
+    }
 
     if (!isPost(candidate)) {
       if (process.env.NODE_ENV !== 'production') {
@@ -103,7 +128,12 @@ function getAllPosts(): Post[] {
     return results;
   };
 
-  return collect(POSTS_DIR).sort((a, b) => (a.date < b.date ? 1 : -1));
+  return collect(POSTS_DIR).sort((a, b) => {
+    const aTime = getSortableDateValue(a.date);
+    const bTime = getSortableDateValue(b.date);
+    if (aTime === bTime) return 0;
+    return aTime < bTime ? 1 : -1;
+  });
 }
 
 // 開発環境では毎回最新のファイルを読み込むため、関数としてエクスポート

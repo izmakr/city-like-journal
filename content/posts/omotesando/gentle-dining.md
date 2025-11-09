@@ -2,6 +2,7 @@
 id: omotesando-gentle-dining
 slug: omotesando/gentle-dining
 title: "静けさと艶が交わる、表参道『GENTLE Dining』で過ごす夜"
+storeName: 'GENTLE Dining'
 date: 2025-11-09
 area: 表参道
 nearestStation: 表参道駅

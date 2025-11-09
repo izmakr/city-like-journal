@@ -4,7 +4,10 @@ import { SearchProvider } from '@/contexts/SearchContext';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'City Like Journal',
+  title: {
+    default: '東京のカフェ・バー案内',
+    template: '%s｜City Like Journal',
+  },
   description: '都市の&ldquo;好き&rdquo;を、気ままにアーカイブする',
   metadataBase: new URL('https://citylikejournal.com'),
 };

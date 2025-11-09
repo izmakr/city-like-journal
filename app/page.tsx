@@ -1,6 +1,13 @@
+import type { Metadata } from 'next';
 import { getPosts, getAreaGroups } from '@/lib/data';
 import { HeroSection } from '@/components/HeroSection';
 import { HomeContent } from '@/components/HomeContent';
+
+export const metadata: Metadata = {
+  title: {
+    absolute: '東京のカフェ・バー案内｜City Like Journal',
+  },
+};
 
 export default function Page() {
   // 開発環境では毎回最新の記事を取得

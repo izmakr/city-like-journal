@@ -2,7 +2,8 @@
 id: ebisu-draft
 slug: ebisu/draft
 title: 「焼酎の香りが恋を連れてくる」恵比寿 /DRAFTの夜
-date: 2025-11-04T00:00:00.000Z
+storeName: '/DRAFT'
+date: 2025-11-04
 area: 恵比寿
 kind: バー
 cover:  https://tblg.k-img.com/restaurant/images/Rvw/261037/640x640_rect_60c5d5fc7efc093d080e4e3054cc0b6a.jpg

@@ -2,6 +2,7 @@
 id: daikanyama-the-rose
 slug: daikanyama/the-rose
 title: 代官山の薔薇で叶える、選ぶ愉しみのオーダーメイド
+storeName: 'THE ROSE'
 date: 2025-11-08
 area: 代官山
 kind: [イタリアン, ダイニングバー]

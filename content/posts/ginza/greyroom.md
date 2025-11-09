@@ -2,6 +2,7 @@
 id: ginza-greyroom
 slug: ginza/greyroom
 title: 銀座の夜を静かに染める、灰の香とスパイスの余韻
+storeName: 'THE GREY ROOM'
 date: 2025-11-05
 area: 銀座
 kind: [バー, カフェ]

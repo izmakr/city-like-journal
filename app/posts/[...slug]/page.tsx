@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import type { Post } from '@/lib/types';
 import { getPosts } from '@/lib/data';
 import Image from 'next/image';
@@ -5,12 +6,50 @@ import Link from 'next/link';
 import { PostContent } from '@/components/PostContent';
 import { Chip } from '@/components/Chip';
 import { PostRouteMap } from '@/components/PostRouteMap';
+import { formatPostDate } from '@/lib/postUtils';
 
 export const dynamic = 'error'; // 完全静的
 
 export async function generateStaticParams() {
   const posts = getPosts();
   return posts.map((p) => ({ slug: p.slug.split('/') }));
+}
+
+const createPostTitle = (post: Post | undefined): string => {
+  if (!post) {
+    return '東京 スポット 特集';
+  }
+
+  const tokens: string[] = [];
+  tokens.push('東京');
+
+  const area = post.area?.trim();
+  if (area && area !== '東京') {
+    tokens.push(area);
+  }
+
+  const category = post.kind[0]?.trim();
+  tokens.push(category && category.length > 0 ? category : 'スポット');
+
+  const storeName = post.storeNameShort?.trim()
+    || post.storeName?.trim()
+    || post.title.trim();
+  tokens.push(storeName);
+
+  return tokens.join(' ');
+};
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string[] }> },
+): Promise<Metadata> {
+  const { slug } = await params;
+  const slugPath = Array.isArray(slug) ? slug.join('/') : slug;
+  const posts = getPosts();
+  const post = posts.find((p) => p.slug === slugPath);
+
+  return {
+    title: createPostTitle(post),
+  };
 }
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string[] }> }) {
@@ -40,7 +79,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       />
       <h1 className="mt-6 text-2xl md:text-3xl font-bold leading-tight">{post.title}</h1>
       <div className="mt-3 flex items-center gap-3 flex-wrap">
-        <time className="text-xs text-gray-400">{new Date(post.date).toLocaleDateString('ja-JP')}</time>
+        <time className="text-xs text-gray-400">{formatPostDate(post.date)}</time>
         <Chip variant="area">{post.area}</Chip>
         {post.kind.map((k, i) => (
           <Chip key={i} variant="kind">{k}</Chip>

@@ -2,6 +2,8 @@
 id: nakameguro-starbucks-reserve
 slug: nakameguro/starbucks-reserve
 title: 焙煎の香りに包まれる、東京の“コーヒーの聖地”
+storeName: 'スターバックス リザーブ ロースタリー トウキョウ'
+storeNameShort: 'スターバックス リザーブ'
 date: 2025-11-07
 area: 中目黒
 kind: [カフェ, バー]

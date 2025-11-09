@@ -2,6 +2,7 @@
 id: ginza-tirnanog
 slug: ginza/tirnanog
 title: "銀座地下、妖精の楽園で泡が舞う夜"
+storeName: 'ティル・ナ・ノーグ'
 date: 2025-11-06
 area: 銀座
 kind: [バー, カフェ]

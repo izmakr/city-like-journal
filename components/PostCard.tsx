@@ -3,6 +3,7 @@ import { Calendar } from 'lucide-react';
 import Link from 'next/link';
 import { Chip } from './Chip';
 import type { Post } from '@/lib/types';
+import { formatPostDate } from '@/lib/postUtils';
 
 export function PostCard({ post }: { post: Post }) {
   return (
@@ -21,7 +22,7 @@ export function PostCard({ post }: { post: Post }) {
       <div className="p-4">
         <div className="flex items-center gap-2 text-xs text-gray-400">
           <Calendar size={14} />
-          <time>{new Date(post.date).toLocaleDateString('ja-JP')}</time>
+          <time>{formatPostDate(post.date)}</time>
         </div>
         <div className="mt-3 flex items-center gap-2 flex-wrap">
           <Chip variant="area">{post.area}</Chip>
