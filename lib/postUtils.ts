@@ -11,6 +11,7 @@ export const normalizeKind = (kind: string | string[] | undefined): string[] => 
 };
 
 export const CITY_SLUG = 'tokyo';
+export const SITE_ORIGIN = 'https://citylikejournal.com';
 
 const toAsciiSlug = (value: string | undefined): string => {
   if (!value) return '';
@@ -44,6 +45,106 @@ export const resolvePrimaryCategorySlug = (kinds: readonly string[], preferredKi
 export const buildPostPermalink = (citySlug: string, areaSlug: string, categorySlug: string, storeSlug: string, trailingSlash: boolean = true): string => {
   const base = `/${citySlug}/${areaSlug}/${categorySlug}/${storeSlug}`;
   return trailingSlash ? `${base}/` : base;
+};
+
+const buildAbsoluteUrl = (path: string): string => {
+  try {
+    return new URL(path, SITE_ORIGIN).toString();
+  } catch {
+    return `${SITE_ORIGIN}${path.startsWith('/') ? '' : '/'}${path}`;
+  }
+};
+
+const BUSINESS_TYPE_FALLBACK = 'LocalBusiness';
+
+const resolveBusinessType = (categorySlug: string): string => {
+  switch (categorySlug) {
+    case 'cafe':
+    case 'sweets-bakery':
+      return 'CafeOrCoffeeShop';
+    case 'noodles':
+      return 'Restaurant';
+    case 'bar-lounge':
+      return 'BarOrPub';
+    case 'italian-french':
+    case 'restaurant-dining':
+    case 'asian-dining':
+    case 'japanese-sushi':
+      return 'Restaurant';
+    default:
+      return BUSINESS_TYPE_FALLBACK;
+  }
+};
+
+export const buildPostStructuredData = (post: Post) => {
+  const url = buildAbsoluteUrl(post.permalink);
+  const imageList = post.cover ? [post.cover] : undefined;
+  const hasGeo = Number.isFinite(post.latitude) && Number.isFinite(post.longitude);
+  const businessType = resolveBusinessType(post.categorySlug);
+
+  const article: Record<string, unknown> = {
+    '@type': 'BlogPosting',
+    '@id': `${url}#article`,
+    headline: post.title,
+    name: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    dateModified: post.date,
+    image: imageList,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url,
+    },
+    author: {
+      '@type': 'Organization',
+      name: 'City Like Journal',
+      url: SITE_ORIGIN,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'City Like Journal',
+      url: SITE_ORIGIN,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_ORIGIN}/favicon.ico`,
+      },
+    },
+  };
+
+  const localBusiness: Record<string, unknown> = {
+    '@type': businessType,
+    '@id': `${url}#business`,
+    name: post.storeName,
+    description: post.excerpt,
+    url,
+    image: imageList,
+    address: post.address
+      ? {
+          '@type': 'PostalAddress',
+          streetAddress: post.address,
+          addressLocality: post.area ?? '東京',
+          addressRegion: '東京都',
+          addressCountry: 'JP',
+        }
+      : undefined,
+    geo: hasGeo
+      ? {
+          '@type': 'GeoCoordinates',
+          latitude: post.latitude,
+          longitude: post.longitude,
+        }
+      : undefined,
+  };
+
+  const graph: Record<string, unknown>[] = [article];
+  if (localBusiness.address || localBusiness.geo || localBusiness.description || localBusiness.image) {
+    graph.push(localBusiness);
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': graph,
+  };
 };
 
 const ISO_DATE_ONLY_PATTERN = /^\d{4}-\d{2}-\d{2}$/;

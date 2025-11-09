@@ -3,10 +3,11 @@ import type { Post } from '@/lib/types';
 import { getPosts } from '@/lib/data';
 import Image from 'next/image';
 import Link from 'next/link';
+import Script from 'next/script';
 import { PostContent } from '@/components/PostContent';
 import { Chip } from '@/components/Chip';
 import { PostRouteMap } from '@/components/PostRouteMap';
-import { buildPostMetaDescription, formatPostDate } from '@/lib/postUtils';
+import { buildPostMetaDescription, buildPostStructuredData, formatPostDate, SITE_ORIGIN } from '@/lib/postUtils';
 
 export const dynamic = 'error';
 
@@ -59,6 +60,7 @@ export async function generateMetadata(
   return {
     title: createPostTitle(post),
     description: post ? buildPostMetaDescription(post) : undefined,
+    alternates: post ? { canonical: new URL(post.permalink, SITE_ORIGIN).toString() } : undefined,
   };
 }
 
@@ -69,8 +71,16 @@ export default async function PostPage(
   const post = findPostByParams(resolved);
   if (!post) return null;
 
+  const structuredData = buildPostStructuredData(post);
+
   return (
     <article className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <Script
+        id={`structured-data-${post.id}`}
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <div className="mb-4">
         <Link href="/" className="inline-flex items-center gap-2 text-sm text-[#9AA7B2] hover:text-[#E6EAF2]">
           <span>←</span>
