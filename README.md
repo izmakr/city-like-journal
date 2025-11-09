@@ -76,6 +76,13 @@ npm run dev
   - `CATEGORY_DEFINITIONS` に表示用グループ・アイコン・カラーを定義。  
   - マーカー表示やフィルターのグループ／サブカテゴリ候補に利用されます。
 
+### サイトマップ & robots
+
+- `app/sitemap.ts` が `sitemap.xml` を自動生成します。  
+  - 新しい記事を追加したらデプロイ後に `https://citylikejournal.com/sitemap.xml` を Search Console へ送信してください。
+- `app/robots.ts` は `robots.txt` を出力します。  
+  - 追加のクローラー制御が必要になった場合はこのファイルを編集します。
+
 ### 駅座標
 
 `lib/stations.ts` で駅名と座標を集中管理しています。  
