@@ -36,7 +36,13 @@ export function Header() {
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b" style={{ borderColor: '#1F2633', background: 'rgba(11,14,19,0.6)', backdropFilter: 'blur(10px)' }}>
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-3">
-        <Link href="/" className="text-sm md:text-base font-semibold tracking-tight flex-shrink-0">City Like Journal</Link>
+        <div className="flex items-center gap-6">
+          <Link href="/" className="text-sm md:text-base font-semibold tracking-tight flex-shrink-0 text-[#E6EAF2]">City Like Journal</Link>
+          <nav className="hidden md:flex items-center gap-5 text-sm">
+            <Link href="/tokyo/" className="text-[#9AA7B2] hover:text-[#E6EAF2] transition-colors">エリア一覧</Link>
+            <Link href="/category/" className="text-[#9AA7B2] hover:text-[#E6EAF2] transition-colors">カテゴリ一覧</Link>
+          </nav>
+        </div>
 
         <div className="flex items-center gap-2">
           <button
@@ -104,6 +110,8 @@ export function Header() {
           >
             <nav className="flex flex-col">
               <Link href="/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>ホーム</Link>
+              <Link href="/tokyo/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>エリア一覧</Link>
+              <Link href="/category/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>カテゴリ一覧</Link>
               <Link href="/tokyo/shibuya/cafe/valley-park-stand/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>特別記事1</Link>
               <Link href="/tokyo/nakameguro/cafe/starbucks-reserve/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>特別記事2</Link>
               <Link href="/tokyo/ginza/bar-lounge/greyroom/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>特別記事3</Link>

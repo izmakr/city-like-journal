@@ -83,6 +83,17 @@ npm run dev
 - `app/robots.ts` は `robots.txt` を出力します。  
   - 追加のクローラー制御が必要になった場合はこのファイルを編集します。
 
+### ページ構成（URL 階層）
+
+- `/tokyo/`：東京全体のハブページ。エリア一覧＋最新スポットを表示。
+- `/tokyo/[area]/`：エリア別ページ。カテゴリでフィルタでき、該当記事を PostCard で表示。
+- `/tokyo/[area]/[category]/`：エリア×カテゴリの一覧ページ。
+- `/tokyo/[area]/[category]/[store]/`：記事詳細ページ。
+- `/category/`：カテゴリ一覧ページ。カテゴリごとの記事数を表示。
+- `/category/[category]/`：カテゴリ詳細ページ。対象カテゴリの記事一覧を表示。
+
+パンくずナビゲーションは上記階層に合わせて `Home / 東京 / エリア / カテゴリ / 店舗` を表示し、JSON-LD (`BreadcrumbList`) も付与しています。
+
 ### 駅座標
 
 `lib/stations.ts` で駅名と座標を集中管理しています。  

@@ -296,6 +296,36 @@ export const buildBreadcrumbStructuredData = (items: BreadcrumbItem[]) => ({
   })),
 });
 
+export const buildAreaBreadcrumbItems = (areaLabel: string): BreadcrumbItem[] => [
+  { label: 'ホーム', href: '/' },
+  { label: '東京', href: `/${CITY_SLUG}/` },
+  { label: areaLabel },
+];
+
+export const buildAreaCategoryBreadcrumbItems = (
+  areaLabel: string,
+  areaSlug: string,
+  categoryLabel: string,
+): BreadcrumbItem[] => [
+  { label: 'ホーム', href: '/' },
+  { label: '東京', href: `/${CITY_SLUG}/` },
+  { label: areaLabel, href: `/${CITY_SLUG}/${areaSlug}/` },
+  { label: categoryLabel },
+];
+
+export const buildCategoryBreadcrumbItems = (categoryLabel: string): BreadcrumbItem[] => [
+  { label: 'ホーム', href: '/' },
+  { label: 'カテゴリ一覧', href: '/category/' },
+  { label: categoryLabel },
+];
+
+export const getPrimaryCategoryLabel = (post: Post): string => {
+  const definition = resolveCategoryVisualForKinds(post.kind, post.kind[0]);
+  if (definition) return definition.group;
+  if (post.kind[0]) return post.kind[0];
+  return 'スポット';
+};
+
 // storeNameShort の自動生成用設定:
 // - STORE_NAME_MAX_LENGTH: EOS で 30 文字を超えるタイトルは省略されることが多いため、ここを上限にする
 // - STORE_NAME_TOKEN_SPLIT: 店名に含まれがちな区切り記号。トークン単位で組み合わせ直して短縮を試みる

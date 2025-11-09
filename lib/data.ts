@@ -202,4 +202,68 @@ export function getKinds(): string[] {
 export const AREA_GROUPS = getAreaGroups();
 export const KINDS = getKinds();
 
+export const getAreaSlugs = (): string[] => {
+  const posts = getPosts();
+  return Array.from(new Set(posts.map((post) => post.areaSlug)));
+};
+
+export const getAreaCategoryCombos = (): { area: string; category: string }[] => {
+  const posts = getPosts();
+  const combos = new Set<string>();
+  posts.forEach((post) => {
+    combos.add(`${post.areaSlug}::${post.categorySlug}`);
+  });
+  return Array.from(combos).map((combo) => {
+    const [area, category] = combo.split('::');
+    return { area, category };
+  });
+};
+
+export const getPostsByArea = (areaSlug: string): Post[] =>
+  getPosts().filter((post) => post.areaSlug === areaSlug);
+
+export const getPostsByCategory = (categorySlug: string): Post[] =>
+  getPosts().filter((post) => post.categorySlug === categorySlug);
+
+export const getPostsByAreaAndCategory = (areaSlug: string, categorySlug: string): Post[] =>
+  getPosts().filter((post) => post.areaSlug === areaSlug && post.categorySlug === categorySlug);
+
+export const getCategorySlugs = (): string[] => {
+  const posts = getPosts();
+  return Array.from(new Set(posts.map((post) => post.categorySlug)));
+};
+
+export const getAreaGroupSummaries = () => {
+  const posts = getPosts();
+  const groups = new Map<string, { label: string; areas: Map<string, { label: string; count: number }> }>();
+
+  posts.forEach((post) => {
+    const groupLabel = getAreaGroupName(post.area);
+    const areaLabel = post.area ?? post.areaSlug;
+    if (!groups.has(groupLabel)) {
+      groups.set(groupLabel, { label: groupLabel, areas: new Map() });
+    }
+    const groupEntry = groups.get(groupLabel)!;
+    const areaEntry = groupEntry.areas.get(post.areaSlug);
+    if (areaEntry) {
+      areaEntry.count += 1;
+    } else {
+      groupEntry.areas.set(post.areaSlug, { label: areaLabel, count: 1 });
+    }
+  });
+
+  const orderedGroups = AREA_GROUP_ORDER.filter((group) => groups.has(group)).map((group) => groups.get(group)!);
+  const others = Array.from(groups.entries())
+    .filter(([label]) => !AREA_GROUP_ORDER.includes(label as typeof AREA_GROUP_ORDER[number]))
+    .map(([, value]) => value)
+    .sort((a, b) => a.label.localeCompare(b.label, 'ja'));
+
+  return [...orderedGroups, ...others].map((group) => ({
+    label: group.label,
+    areas: Array.from(group.areas.entries())
+      .map(([slug, value]) => ({ slug, label: value.label, count: value.count }))
+      .sort((a, b) => a.label.localeCompare(b.label, 'ja')),
+  }));
+};
+
 

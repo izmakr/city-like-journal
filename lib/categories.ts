@@ -11,7 +11,7 @@ export type CategoryVisualDefinition = {
   color: string;
 };
 
-const CATEGORY_DEFINITIONS = [
+export const CATEGORY_DEFINITIONS = [
   {
     group: 'カフェ',
     slug: 'cafe',
@@ -74,7 +74,7 @@ const CATEGORY_DEFINITIONS = [
     color: '#E69A2E',
   },
   {
-    group: 'イタリアン・フレンチ',
+    group: 'イタリアン・フレンチ・ビストロ',
     slug: 'italian-french',
     categories: ['イタリアン', 'フレンチ', 'ビストロ', 'トラットリア', 'リストランテ'],
     icon: 'dining',
