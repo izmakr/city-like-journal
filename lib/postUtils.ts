@@ -238,6 +238,21 @@ export const buildPostMetaDescription = (post: Post): string => {
   return composeMetaDescription(post.excerpt, fallback);
 };
 
+export const buildRelatedPostsHeading = (post: Post): string => {
+  const area = post.area?.trim();
+  const kind = post.kind[0]?.trim();
+  if (area && kind) {
+    return `${area}の${kind}で他に見たいスポット`;
+  }
+  if (area) {
+    return `${area}で他に見たいスポット`;
+  }
+  if (kind) {
+    return `他に見たい${kind}スポット`;
+  }
+  return '関連スポット';
+};
+
 // storeNameShort の自動生成用設定:
 // - STORE_NAME_MAX_LENGTH: EOS で 30 文字を超えるタイトルは省略されることが多いため、ここを上限にする
 // - STORE_NAME_TOKEN_SPLIT: 店名に含まれがちな区切り記号。トークン単位で組み合わせ直して短縮を試みる

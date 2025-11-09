@@ -7,7 +7,9 @@ import Script from 'next/script';
 import { PostContent } from '@/components/PostContent';
 import { Chip } from '@/components/Chip';
 import { PostRouteMap } from '@/components/PostRouteMap';
-import { buildPostMetaDescription, buildPostStructuredData, formatPostDate, SITE_ORIGIN } from '@/lib/postUtils';
+import { PostCard } from '@/components/PostCard';
+import { getRelatedPosts } from '@/lib/postRecommendations';
+import { buildPostMetaDescription, buildPostStructuredData, buildRelatedPostsHeading, formatPostDate, SITE_ORIGIN } from '@/lib/postUtils';
 
 export const dynamic = 'error';
 
@@ -72,6 +74,7 @@ export default async function PostPage(
   if (!post) return null;
 
   const structuredData = buildPostStructuredData(post);
+  const relatedPosts = getRelatedPosts(post, getPosts());
 
   return (
     <article className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
@@ -113,7 +116,19 @@ export default async function PostPage(
           <PostRouteMap post={post} />
         </div>
       )}
+
+      {relatedPosts.length > 0 && (
+        <section className="mt-16">
+          <h2 className="text-xl font-semibold">{buildRelatedPostsHeading(post)}</h2>
+          <div className="mt-6 grid gap-6 sm:grid-cols-2">
+            {relatedPosts.map((related) => (
+              <PostCard key={related.id} post={related} />
+            ))}
+          </div>
+        </section>
+      )}
     </article>
   );
 }
+
 
