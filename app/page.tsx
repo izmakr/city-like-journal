@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: {
     absolute: '東京のカフェ・バー案内｜City Like Journal',
   },
+  description: '東京のカフェやバーを中心に、大人の街歩きに似合うスポットを厳選紹介。エリアとカテゴリから次の一軒を見つける City Like Journal。',
 };
 
 export default function Page() {

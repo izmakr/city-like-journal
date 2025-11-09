@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { PostContent } from '@/components/PostContent';
 import { Chip } from '@/components/Chip';
 import { PostRouteMap } from '@/components/PostRouteMap';
-import { formatPostDate } from '@/lib/postUtils';
+import { buildPostMetaDescription, formatPostDate } from '@/lib/postUtils';
 
 export const dynamic = 'error'; // 完全静的
 
@@ -49,6 +49,7 @@ export async function generateMetadata(
 
   return {
     title: createPostTitle(post),
+    description: post ? buildPostMetaDescription(post) : undefined,
   };
 }
 

@@ -55,6 +55,51 @@ export const getSortableDateValue = (value: string | undefined): number => {
   return date ? date.getTime() : Number.NEGATIVE_INFINITY;
 };
 
+const META_DESCRIPTION_MIN_LENGTH = 70;
+const META_DESCRIPTION_MAX_LENGTH = 110;
+
+const normalizeMetaText = (value: string | undefined): string => {
+  if (!value) return '';
+  return value
+    .replace(/[\r\n]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .replace(/\s*([、。,.!?])/g, '$1')
+    .trim();
+};
+
+const truncateWithEllipsis = (value: string, maxLength: number): string => {
+  if (value.length <= maxLength) {
+    return value;
+  }
+  const truncated = value.slice(0, maxLength).replace(/[、。,.!?・／/|\s]+$/, '');
+  return `${truncated}…`;
+};
+
+export const composeMetaDescription = (primary: string | undefined, fallback: string): string => {
+  const normalizedPrimary = normalizeMetaText(primary);
+  const normalizedFallback = normalizeMetaText(fallback);
+
+  let candidate = normalizedPrimary;
+
+  if (!candidate) {
+    candidate = normalizedFallback;
+  } else if (candidate.length < META_DESCRIPTION_MIN_LENGTH) {
+    candidate = normalizeMetaText(`${candidate} ${normalizedFallback}`);
+  }
+
+  if (!candidate) {
+    return '';
+  }
+
+  return truncateWithEllipsis(candidate, META_DESCRIPTION_MAX_LENGTH);
+};
+
+export const buildPostMetaDescription = (post: Post): string => {
+  const primaryKind = post.kind[0]?.trim() || 'スポット';
+  const fallback = `東京${post.area}の${primaryKind}「${post.storeName}」をCity Like Journalが紹介。アクセスや雰囲気、こだわりポイントまで丁寧にレポートします。`;
+  return composeMetaDescription(post.excerpt, fallback);
+};
+
 // storeNameShort の自動生成用設定:
 // - STORE_NAME_MAX_LENGTH: EOS で 30 文字を超えるタイトルは省略されることが多いため、ここを上限にする
 // - STORE_NAME_TOKEN_SPLIT: 店名に含まれがちな区切り記号。トークン単位で組み合わせ直して短縮を試みる
