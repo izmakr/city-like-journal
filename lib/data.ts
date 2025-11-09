@@ -2,7 +2,15 @@ import { Post, isPost } from "./types";
 import { readdirSync, readFileSync } from "fs";
 import { join, relative } from "path";
 import matter from "gray-matter";
-import { normalizeKind, getSortableDateValue, generateStoreNameShort } from "./postUtils";
+import {
+  normalizeKind,
+  getSortableDateValue,
+  generateStoreNameShort,
+  resolvePrimaryCategorySlug,
+  buildPostPermalink,
+  CITY_SLUG,
+  ensureSlugValue,
+} from "./postUtils";
 import { getAreaGroupName, AREA_GROUP_ORDER } from "./areas";
 
 const POSTS_DIR = join(process.cwd(), "content/posts");
@@ -52,17 +60,33 @@ function parseMarkdownFile(filePath: string, slug: string): Post | null {
     const area = getString('area');
     const areaGroup =
       getString('areaGroup') || getString('areaGroupName') || getString('areaCategory') || getAreaGroupName(area);
+    const storeName = getString('storeName');
+    const storeNameShortFromFrontmatter = getString('storeNameShort') || undefined;
+    const rawSlug = getString('slug') || slug;
+    const slugSegments = rawSlug.split('/').map((segment) => segment.trim()).filter((segment) => segment.length > 0);
+    const areaSlug = slugSegments[0] || ensureSlugValue(area, CITY_SLUG);
+    const storeSlugFromSlug =
+      slugSegments.length > 1 ? slugSegments[slugSegments.length - 1] : slugSegments[0];
+    const storeSlug = storeSlugFromSlug || ensureSlugValue(storeName, slugSegments.join('-'));
+    const kinds = normalizeKind(getStringArray('kind'));
+    const primaryCategorySlug = resolvePrimaryCategorySlug(kinds, kinds[0]);
+    const permalink = buildPostPermalink(CITY_SLUG, areaSlug, primaryCategorySlug, storeSlug);
 
     const candidate = {
       id: getString('id') || slug,
-      slug: getString('slug') || slug,
+      slug: rawSlug,
       title: getString('title'),
-      storeName: getString('storeName'),
-      storeNameShort: getString('storeNameShort') || undefined,
+      storeName,
+      storeNameShort: storeNameShortFromFrontmatter,
+      citySlug: CITY_SLUG,
+      areaSlug,
+      categorySlug: primaryCategorySlug,
+      storeSlug,
+      permalink,
       date: getString('date'),
       area,
       areaGroup: areaGroup || area,
-      kind: normalizeKind(getStringArray('kind')),
+      kind: kinds,
       cover: getString('cover'),
       excerpt: getString('excerpt'),
       content: content.trim(),

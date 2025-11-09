@@ -4,6 +4,11 @@ export type Post = {
   title: string;
   storeName: string;
   storeNameShort?: string;
+  citySlug: string;
+  areaSlug: string;
+  categorySlug: string;
+  storeSlug: string;
+  permalink: string;
   date: string; // ISO
   area: string; // エリア
   areaGroup: string; // 大カテゴリ
@@ -22,7 +27,23 @@ const isNonEmptyString = (value: unknown): value is string => typeof value === '
 export const isPost = (value: unknown): value is Post => {
   if (!value || typeof value !== 'object') return false;
   const candidate = value as Record<string, unknown>;
-  const requiredStrings: (keyof Post)[] = ['id', 'slug', 'title', 'storeName', 'date', 'area', 'areaGroup', 'cover', 'excerpt', 'content'];
+  const requiredStrings: (keyof Post)[] = [
+    'id',
+    'slug',
+    'title',
+    'storeName',
+    'citySlug',
+    'areaSlug',
+    'categorySlug',
+    'storeSlug',
+    'permalink',
+    'date',
+    'area',
+    'areaGroup',
+    'cover',
+    'excerpt',
+    'content',
+  ];
 
   if (!requiredStrings.every((key) => isNonEmptyString(candidate[key]))) {
     return false;

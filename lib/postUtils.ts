@@ -1,3 +1,4 @@
+import { resolveCategoryVisualForKinds } from "./categories";
 import type { Post } from "./types";
 
 export const normalizeKind = (kind: string | string[] | undefined): string[] => {
@@ -7,6 +8,42 @@ export const normalizeKind = (kind: string | string[] | undefined): string[] => 
   }
   const trimmed = kind.trim();
   return trimmed ? [trimmed] : [];
+};
+
+export const CITY_SLUG = 'tokyo';
+
+const toAsciiSlug = (value: string | undefined): string => {
+  if (!value) return '';
+  const ascii = value
+    .trim()
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .toLowerCase();
+  return ascii;
+};
+
+export const ensureSlugValue = (value: string | undefined, fallback: string): string => {
+  const primary = toAsciiSlug(value);
+  if (primary) return primary;
+  const secondary = toAsciiSlug(fallback);
+  if (secondary) return secondary;
+  return 'spot';
+};
+
+export const resolvePrimaryCategorySlug = (kinds: readonly string[], preferredKind?: string): string => {
+  const definition = resolveCategoryVisualForKinds(kinds, preferredKind);
+  if (definition?.slug) {
+    return definition.slug;
+  }
+  const fallbackKind = preferredKind ?? kinds[0];
+  return ensureSlugValue(fallbackKind, 'spot');
+};
+
+export const buildPostPermalink = (citySlug: string, areaSlug: string, categorySlug: string, storeSlug: string, trailingSlash: boolean = true): string => {
+  const base = `/${citySlug}/${areaSlug}/${categorySlug}/${storeSlug}`;
+  return trailingSlash ? `${base}/` : base;
 };
 
 const ISO_DATE_ONLY_PATTERN = /^\d{4}-\d{2}-\d{2}$/;

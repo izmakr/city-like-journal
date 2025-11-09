@@ -5,6 +5,7 @@ type CategoryKey = string;
 
 export type CategoryVisualDefinition = {
   group: string;
+  slug: string;
   categories: readonly string[];
   icon: MapIconType;
   color: string;
@@ -13,12 +14,14 @@ export type CategoryVisualDefinition = {
 const CATEGORY_DEFINITIONS = [
   {
     group: 'カフェ',
+    slug: 'cafe',
     categories: ['カフェ', 'コーヒー', '喫茶', 'ティーラウンジ', 'ティーハウス', 'ブランチ'],
     icon: 'cafe',
     color: '#8D6E63',
   },
   {
     group: 'スイーツ・ベーカリー',
+    slug: 'sweets-bakery',
     categories: [
       'スイーツ',
       'デザート',
@@ -35,6 +38,7 @@ const CATEGORY_DEFINITIONS = [
   },
   {
     group: 'バー・ラウンジ',
+    slug: 'bar-lounge',
     categories: [
       'バー',
       'ワインバー',
@@ -52,6 +56,7 @@ const CATEGORY_DEFINITIONS = [
   },
   {
     group: 'レストラン・ダイニング',
+    slug: 'restaurant-dining',
     categories: [
       'レストラン',
       'ダイニング',
@@ -70,18 +75,21 @@ const CATEGORY_DEFINITIONS = [
   },
   {
     group: 'イタリアン・フレンチ',
+    slug: 'italian-french',
     categories: ['イタリアン', 'フレンチ', 'ビストロ', 'トラットリア', 'リストランテ'],
     icon: 'dining',
     color: '#D2691E',
   },
   {
     group: '和食・寿司',
+    slug: 'japanese-sushi',
     categories: ['和食', '寿司', '割烹', '天ぷら', '懐石', 'そば', 'うどん', 'しゃぶしゃぶ', 'すき焼き', 'おでん'],
     icon: 'sushi',
     color: '#BFA56A',
   },
   {
     group: '中華・アジア',
+    slug: 'asian-dining',
     categories: [
       '中華',
       '中国料理',
@@ -98,6 +106,7 @@ const CATEGORY_DEFINITIONS = [
   },
   {
     group: 'ラーメン・麺料理',
+    slug: 'noodles',
     categories: ['ラーメン', 'つけ麺', '担々麺', '麺料理'],
     icon: 'ramen',
     color: '#E5843A',
@@ -125,6 +134,7 @@ const CATEGORY_PRIORITY = CATEGORY_DEFINITIONS.map((definition) => definition.gr
 
 export const CATEGORY_DEFAULT_VISUAL: CategoryVisualDefinition = {
   group: 'その他',
+  slug: 'other',
   categories: [],
   icon: 'default',
   color: '#7FB4FF',

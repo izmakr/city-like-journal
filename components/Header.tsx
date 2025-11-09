@@ -104,9 +104,9 @@ export function Header() {
           >
             <nav className="flex flex-col">
               <Link href="/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>ホーム</Link>
-              <Link href="/posts/valley-park-stand/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>特別記事1</Link>
-              <Link href="/posts/dummy-1/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>特別記事2</Link>
-              <Link href="/posts/dummy-2/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>特別記事3</Link>
+              <Link href="/tokyo/shibuya/cafe/valley-park-stand/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>特別記事1</Link>
+              <Link href="/tokyo/nakameguro/cafe/starbucks-reserve/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>特別記事2</Link>
+              <Link href="/tokyo/ginza/bar-lounge/greyroom/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>特別記事3</Link>
             </nav>
           </div>
         </>

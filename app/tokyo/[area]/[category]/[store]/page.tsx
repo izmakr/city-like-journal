@@ -8,11 +8,15 @@ import { Chip } from '@/components/Chip';
 import { PostRouteMap } from '@/components/PostRouteMap';
 import { buildPostMetaDescription, formatPostDate } from '@/lib/postUtils';
 
-export const dynamic = 'error'; // 完全静的
+export const dynamic = 'error';
 
 export async function generateStaticParams() {
   const posts = getPosts();
-  return posts.map((p) => ({ slug: p.slug.split('/') }));
+  return posts.map((post) => ({
+    area: post.areaSlug,
+    category: post.categorySlug,
+    store: post.storeSlug,
+  }));
 }
 
 const createPostTitle = (post: Post | undefined): string => {
@@ -39,13 +43,18 @@ const createPostTitle = (post: Post | undefined): string => {
   return tokens.join(' ');
 };
 
-export async function generateMetadata(
-  { params }: { params: Promise<{ slug: string[] }> },
-): Promise<Metadata> {
-  const { slug } = await params;
-  const slugPath = Array.isArray(slug) ? slug.join('/') : slug;
+const findPostByParams = (params: { area: string; category: string; store: string }): Post | undefined => {
   const posts = getPosts();
-  const post = posts.find((p) => p.slug === slugPath);
+  return posts.find(
+    (p) => p.areaSlug === params.area && p.categorySlug === params.category && p.storeSlug === params.store,
+  );
+};
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ area: string; category: string; store: string }> },
+): Promise<Metadata> {
+  const resolved = await params;
+  const post = findPostByParams(resolved);
 
   return {
     title: createPostTitle(post),
@@ -53,11 +62,11 @@ export async function generateMetadata(
   };
 }
 
-export default async function PostPage({ params }: { params: Promise<{ slug: string[] }> }) {
-  const { slug } = await params;
-  const slugPath = Array.isArray(slug) ? slug.join('/') : slug;
-  const posts = getPosts();
-  const post: Post | undefined = posts.find((p) => p.slug === slugPath);
+export default async function PostPage(
+  { params }: { params: Promise<{ area: string; category: string; store: string }> },
+) {
+  const resolved = await params;
+  const post = findPostByParams(resolved);
   if (!post) return null;
 
   return (
@@ -97,5 +106,4 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     </article>
   );
 }
-
 

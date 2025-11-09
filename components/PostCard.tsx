@@ -7,7 +7,7 @@ import { formatPostDate } from '@/lib/postUtils';
 
 export function PostCard({ post }: { post: Post }) {
   return (
-    <Link href={`/posts/${post.slug}/`} className="block">
+    <Link href={post.permalink} className="block">
       <article className="rounded-2xl overflow-hidden border hover:-translate-y-0.5 transition transform" style={{ borderColor: '#1F2633', background: '#131823' }}>
       <div className="aspect-[16/10] relative overflow-hidden">
         <Image
