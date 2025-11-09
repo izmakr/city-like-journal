@@ -253,6 +253,49 @@ export const buildRelatedPostsHeading = (post: Post): string => {
   return '関連スポット';
 };
 
+type BreadcrumbItem = {
+  label: string;
+  href?: string;
+};
+
+export const buildBreadcrumbItems = (post: Post): BreadcrumbItem[] => {
+  const items: BreadcrumbItem[] = [
+    { label: 'ホーム', href: '/' },
+    { label: '東京', href: `/${CITY_SLUG}/` },
+  ];
+
+  if (post.area) {
+    items.push({
+      label: post.area,
+      href: `/${CITY_SLUG}/${post.areaSlug}/`,
+    });
+  }
+
+  if (post.kind[0]) {
+    items.push({
+      label: post.kind[0],
+      href: `/${CITY_SLUG}/${post.areaSlug}/${post.categorySlug}/`,
+    });
+  }
+
+  items.push({
+    label: post.storeName,
+  });
+
+  return items;
+};
+
+export const buildBreadcrumbStructuredData = (items: BreadcrumbItem[]) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    item: item.href ? buildAbsoluteUrl(item.href) : undefined,
+  })),
+});
+
 // storeNameShort の自動生成用設定:
 // - STORE_NAME_MAX_LENGTH: EOS で 30 文字を超えるタイトルは省略されることが多いため、ここを上限にする
 // - STORE_NAME_TOKEN_SPLIT: 店名に含まれがちな区切り記号。トークン単位で組み合わせ直して短縮を試みる

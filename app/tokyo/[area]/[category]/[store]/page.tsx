@@ -2,14 +2,22 @@ import type { Metadata } from 'next';
 import type { Post } from '@/lib/types';
 import { getPosts } from '@/lib/data';
 import Image from 'next/image';
-import Link from 'next/link';
 import Script from 'next/script';
 import { PostContent } from '@/components/PostContent';
 import { Chip } from '@/components/Chip';
 import { PostRouteMap } from '@/components/PostRouteMap';
 import { PostCard } from '@/components/PostCard';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { getRelatedPosts } from '@/lib/postRecommendations';
-import { buildPostMetaDescription, buildPostStructuredData, buildRelatedPostsHeading, formatPostDate, SITE_ORIGIN } from '@/lib/postUtils';
+import {
+  buildPostMetaDescription,
+  buildPostStructuredData,
+  buildRelatedPostsHeading,
+  formatPostDate,
+  SITE_ORIGIN,
+  buildBreadcrumbStructuredData,
+  buildBreadcrumbItems,
+} from '@/lib/postUtils';
 
 export const dynamic = 'error';
 
@@ -75,6 +83,8 @@ export default async function PostPage(
 
   const structuredData = buildPostStructuredData(post);
   const relatedPosts = getRelatedPosts(post, getPosts());
+  const breadcrumbItems = buildBreadcrumbItems(post);
+  const breadcrumbStructuredData = buildBreadcrumbStructuredData(breadcrumbItems);
 
   return (
     <article className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
@@ -84,11 +94,14 @@ export default async function PostPage(
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <div className="mb-4">
-        <Link href="/" className="inline-flex items-center gap-2 text-sm text-[#9AA7B2] hover:text-[#E6EAF2]">
-          <span>←</span>
-          <span>一覧に戻る</span>
-        </Link>
+      <Script
+        id={`breadcrumb-structured-data-${post.id}`}
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
+      />
+      <div className="mt-2 mb-6">
+        <Breadcrumbs items={breadcrumbItems} />
       </div>
       <Image
         src={post.cover}
