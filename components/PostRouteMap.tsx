@@ -13,7 +13,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 
 type MapLibreModule = typeof import('maplibre-gl');
 
-type PostRouteMapProps = {
+export type PostRouteMapProps = {
   post: Post;
 };
 
