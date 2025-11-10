@@ -12,13 +12,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: SITE_ORIGIN,
       lastModified: today,
-      changeFrequency: 'weekly',
+      changeFrequency: 'weekly' as const,
       priority: 1,
     },
     ...posts.map((post) => ({
       url: buildAbsoluteUrl(post.permalink),
       lastModified: post.date ? new Date(post.date) : undefined,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.7,
     })),
   ];
