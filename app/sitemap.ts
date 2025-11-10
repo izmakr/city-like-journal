@@ -2,6 +2,8 @@ import type { MetadataRoute } from 'next';
 import { getPosts } from '@/lib/data';
 import { SITE_ORIGIN } from '@/lib/postUtils';
 
+export const dynamic = 'force-static';
+
 const buildAbsoluteUrl = (path: string): string => new URL(path, SITE_ORIGIN).toString();
 
 export default function sitemap(): MetadataRoute.Sitemap {

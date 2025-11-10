@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { getPosts, getAreaGroups } from '@/lib/data';
 import { HeroSection } from '@/components/HeroSection';
 import { HomeContent } from '@/components/HomeContent';
@@ -19,7 +20,20 @@ export default function Page() {
     <>
       <HeroSection />
       <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
-        <HomeContent posts={posts} areaGroups={areaGroups} />
+        <Suspense
+          fallback={
+            <div className="grid gap-8">
+              <div className="h-72 rounded-xl bg-gray-100 animate-pulse" />
+              <div className="space-y-4">
+                <div className="h-6 w-1/2 rounded bg-gray-100 animate-pulse" />
+                <div className="h-6 w-2/3 rounded bg-gray-100 animate-pulse" />
+                <div className="h-6 w-3/4 rounded bg-gray-100 animate-pulse" />
+              </div>
+            </div>
+          }
+        >
+          <HomeContent posts={posts} areaGroups={areaGroups} />
+        </Suspense>
       </main>
       <footer className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <p className="text-center text-sm text-gray-400">

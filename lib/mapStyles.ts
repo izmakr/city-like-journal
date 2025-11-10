@@ -25,15 +25,18 @@ const buildAllowedNameCondition = () => {
     false,
   ] as const;
 
-  const patternMatches = MAP_LABEL_ALLOWED_NAME_PATTERNS.map((pattern) => [
-    '>=',
-    [
-      'index-of',
-      pattern,
-      ['coalesce', ['get', 'name:ja'], ['get', 'name'], ['literal', '']],
-    ],
-    0,
-  ]) as const;
+  const patternMatches = MAP_LABEL_ALLOWED_NAME_PATTERNS.map(
+    (pattern) =>
+      [
+        '>=',
+        [
+          'index-of',
+          pattern,
+          ['coalesce', ['get', 'name:ja'], ['get', 'name'], ['literal', '']],
+        ],
+        0,
+      ] as const,
+  );
 
   return ['any', classMatch, ...patternMatches] as const;
 };
