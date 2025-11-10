@@ -110,7 +110,7 @@ export default async function PostPage(
         height={800}
         className="w-full h-auto rounded-2xl border"
         style={{ borderColor: '#1F2633' }}
-        unoptimized
+        priority
         sizes="(min-width: 1024px) 768px, 100vw"
       />
       <h1 className="mt-6 text-2xl md:text-3xl font-bold leading-tight">{post.title}</h1>
