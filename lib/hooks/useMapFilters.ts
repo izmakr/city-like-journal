@@ -1,7 +1,8 @@
 import { useCallback, useMemo, useState } from 'react';
+
+import { getAllCategoryGroups, getCategoriesByGroup, getCategoryVisual } from '@/lib/categories';
 import type { Post } from '@/lib/types';
 import { buildSearchText } from '@/lib/postUtils';
-import { getAllCategoryGroups, getCategoriesByGroup, getCategoryVisual } from '@/lib/categories';
 
 const ALL = 'all';
 
@@ -27,6 +28,93 @@ export const useMapFilters = (
   searchQuery: string,
   predefinedAreaGroups?: string[],
 ): UseMapFiltersResult => {
+  const categoryDefinitions = useMemo(() => getAllCategoryGroups(), []);
+
+  const {
+    searchTextById,
+    categoriesByGroupFromPosts,
+    allCategoriesFromPosts,
+    postGroupsById,
+    areaGroupsFromPosts,
+    areasByAreaGroup,
+    allAreasFromPosts,
+  } = useMemo(() => {
+    const searchText = new Map<string, string>();
+    const categoriesByGroupMap = new Map<string, Set<string>>();
+    const allCategoriesSet = new Set<string>();
+    const groupsByPost = new Map<string, Set<string>>();
+    const areaGroupsSet = new Set<string>();
+    const areasByGroupMap = new Map<string, Set<string>>();
+    const allAreasSet = new Set<string>();
+
+    posts.forEach((post) => {
+      searchText.set(post.id, buildSearchText(post));
+
+      const groupSet = new Set<string>();
+      post.kind?.forEach((entry) => {
+        const visual = getCategoryVisual(entry);
+        if (!visual?.group) return;
+        groupSet.add(visual.group);
+
+        const existingCategories = categoriesByGroupMap.get(visual.group) ?? new Set<string>();
+        existingCategories.add(entry);
+        categoriesByGroupMap.set(visual.group, existingCategories);
+        allCategoriesSet.add(entry);
+      });
+
+      if (groupSet.size > 0) {
+        groupsByPost.set(post.id, groupSet);
+      }
+
+      if (post.areaGroup) {
+        areaGroupsSet.add(post.areaGroup);
+        const existingAreas = areasByGroupMap.get(post.areaGroup) ?? new Set<string>();
+        if (post.area) {
+          existingAreas.add(post.area);
+          allAreasSet.add(post.area);
+        }
+        areasByGroupMap.set(post.areaGroup, existingAreas);
+      }
+
+      if (post.area) {
+        allAreasSet.add(post.area);
+      }
+    });
+
+    const categoriesByGroupSorted = new Map<string, string[]>();
+    categoriesByGroupMap.forEach((value, key) => {
+      categoriesByGroupSorted.set(key, Array.from(value).sort());
+    });
+
+    const areasByGroupSorted = new Map<string, string[]>();
+    areasByGroupMap.forEach((value, key) => {
+      areasByGroupSorted.set(key, Array.from(value).sort());
+    });
+
+    return {
+      searchTextById: searchText,
+      categoriesByGroupFromPosts: categoriesByGroupSorted,
+      allCategoriesFromPosts: Array.from(allCategoriesSet).sort(),
+      postGroupsById: groupsByPost,
+      areaGroupsFromPosts: Array.from(areaGroupsSet).sort(),
+      areasByAreaGroup: areasByGroupSorted,
+      allAreasFromPosts: Array.from(allAreasSet).sort(),
+    };
+  }, [posts]);
+
+  const categoriesFromConfig = useMemo(() => {
+    const map = new Map<string, string[]>();
+    const all = new Set<string>();
+    categoryDefinitions.forEach((definition) => {
+      map.set(definition.group, [...definition.categories]);
+      definition.categories.forEach((category) => all.add(category));
+    });
+    return {
+      map,
+      all: Array.from(all).sort(),
+    };
+  }, [categoryDefinitions]);
+
   const [categoryGroup, setCategoryGroupState] = useState<string>(ALL);
   const [category, setCategoryState] = useState<string>(ALL);
   const [areaGroup, setAreaGroupState] = useState<string>(ALL);
@@ -35,44 +123,43 @@ export const useMapFilters = (
   const normalizedQuery = useMemo(() => searchQuery.trim().toLowerCase(), [searchQuery]);
 
   const categoryGroups = useMemo(() => {
-    const base = getAllCategoryGroups().map((definition) => definition.group);
+    const base = categoryDefinitions.map((definition) => definition.group);
     return [ALL, ...base];
-  }, []);
+  }, [categoryDefinitions]);
 
   const categories = useMemo(() => {
+    const collected = new Set<string>();
+    const fromConfig = categoriesFromConfig.map.get(categoryGroup) ?? [];
+    fromConfig.forEach((entry) => collected.add(entry));
+
     if (categoryGroup === ALL) {
-      const collected = new Set<string>();
-      getAllCategoryGroups().forEach((definition) => {
-        definition.categories.forEach((category) => collected.add(category));
-      });
-      return [ALL, ...Array.from(collected).sort()];
+      categoriesFromConfig.all.forEach((entry) => collected.add(entry));
+      allCategoriesFromPosts.forEach((entry) => collected.add(entry));
+    } else {
+      const fromPosts = categoriesByGroupFromPosts.get(categoryGroup) ?? [];
+      fromPosts.forEach((entry) => collected.add(entry));
+      const predefined = getCategoriesByGroup(categoryGroup) ?? [];
+      predefined.forEach((entry) => collected.add(entry));
     }
-    const scoped = new Set<string>(getCategoriesByGroup(categoryGroup));
-    posts.forEach((post) => {
-      post.kind?.forEach((entry) => {
-        const visual = getCategoryVisual(entry);
-        if (visual?.group === categoryGroup) {
-          scoped.add(entry);
-        }
-      });
-    });
-    return [ALL, ...Array.from(scoped).sort()];
-  }, [categoryGroup, posts]);
+
+    return [ALL, ...Array.from(collected).sort()];
+  }, [categoryGroup, categoriesByGroupFromPosts, categoriesFromConfig, allCategoriesFromPosts]);
 
   const areaGroups = useMemo(() => {
     if (predefinedAreaGroups && predefinedAreaGroups.length > 0) {
       const unique = Array.from(new Set(predefinedAreaGroups));
       return unique[0] === ALL ? unique : [ALL, ...unique.filter((group) => group !== ALL)];
     }
-    const unique = Array.from(new Set(posts.map((post) => post.areaGroup).filter(Boolean))).sort();
-    return [ALL, ...unique];
-  }, [posts, predefinedAreaGroups]);
+    return [ALL, ...areaGroupsFromPosts];
+  }, [areaGroupsFromPosts, predefinedAreaGroups]);
 
   const areas = useMemo(() => {
-    const scopedPosts = areaGroup === ALL ? posts : posts.filter((post) => post.areaGroup === areaGroup);
-    const unique = Array.from(new Set(scopedPosts.map((post) => post.area).filter(Boolean))).sort();
-    return [ALL, ...unique];
-  }, [posts, areaGroup]);
+    if (areaGroup === ALL) {
+      return [ALL, ...allAreasFromPosts];
+    }
+    const scoped = areasByAreaGroup.get(areaGroup) ?? [];
+    return [ALL, ...scoped];
+  }, [areaGroup, areasByAreaGroup, allAreasFromPosts]);
 
   const normalizedArea = useMemo(() => {
     if (area === ALL) return ALL;
@@ -86,18 +173,19 @@ export const useMapFilters = (
 
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
-      const matchesQuery = !normalizedQuery || buildSearchText(post).includes(normalizedQuery);
+      const searchText = searchTextById.get(post.id) ?? '';
+      const matchesQuery = !normalizedQuery || searchText.includes(normalizedQuery);
       const matchesAreaGroup = areaGroup === ALL || post.areaGroup === areaGroup;
       const matchesArea = normalizedArea === ALL || post.area === normalizedArea;
       const matchesCategory =
         normalizedCategory === ALL
           ? categoryGroup === ALL
             ? true
-            : post.kind.some((entry) => getCategoryVisual(entry)?.group === categoryGroup)
+            : (postGroupsById.get(post.id)?.has(categoryGroup) ?? false)
           : post.kind.includes(normalizedCategory);
       return matchesQuery && matchesAreaGroup && matchesArea && matchesCategory;
     });
-  }, [posts, normalizedQuery, areaGroup, normalizedArea, normalizedCategory, categoryGroup]);
+  }, [posts, normalizedQuery, areaGroup, normalizedArea, normalizedCategory, categoryGroup, searchTextById, postGroupsById]);
 
   const setCategoryGroup = useCallback((value: string) => {
     setCategoryGroupState(value || ALL);
