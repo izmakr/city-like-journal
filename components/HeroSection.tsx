@@ -1,13 +1,26 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const HERO_IMAGES = [
-  'https://plus.unsplash.com/premium_photo-1661883237884-263e8de8869b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2089',
-  'https://images.unsplash.com/photo-1759146136291-49cabecf8ad0?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2070',
-  'https://images.unsplash.com/photo-1615887584283-91f1be7fdc34?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=987',
-  'https://images.unsplash.com/photo-1481833761820-0509d3217039?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2070',
-];
+  {
+    src: '/images/common/hero1.png',
+    alt: 'レストランの内観',
+  },
+  {
+    src: '/images/common/hero2.png',
+    alt: '最上級のスイーツカフェ',
+  },
+  {
+    src: '/images/common/hero3.png',
+    alt: '照明に照らされた店内の様子',
+  },
+  {
+    src: '/images/common/hero4.png',
+    alt: '綺麗なバーの外観',
+  },
+] as const;
 
 const TRANSITION_DURATION = 5000; // 5秒ごとに切り替え
 
@@ -23,20 +36,31 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden border p-8 md:p-12 lg:p-16 mb-8 min-h-[540px] md:min-h-[400px] lg:min-h-[500px] flex items-center" style={{ borderColor: '#1F2633' }}>
+    <section
+      className="relative overflow-hidden border p-8 md:p-12 lg:p-16 mb-8 min-h-[540px] md:min-h-[400px] lg:min-h-[500px] flex items-center"
+      style={{ borderColor: '#1F2633' }}
+    >
       {/* 背景画像レイヤー */}
       <div className="absolute inset-0">
-        {HERO_IMAGES.map((image, index) => (
+        {HERO_IMAGES.map(({ src, alt }, index) => (
           <div
-            key={index}
+            key={src}
             className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
             style={{
-              backgroundImage: `linear-gradient(180deg, rgba(19,24,35,.2), rgba(11,14,19,.9)), url(${image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
               opacity: index === currentIndex ? 1 : 0,
             }}
-          />
+          >
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              priority={index === 0}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              sizes="(min-width: 1024px) 1100px, (min-width: 768px) 90vw, 100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#13182333] to-[#0b0e13e6]" />
+          </div>
         ))}
       </div>
 
