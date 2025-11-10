@@ -1,5 +1,8 @@
 "use client";
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
 import { PostList } from '@/components/PostList';
 import { LazyMapView } from '@/components/LazyMapView';
 import type { Post } from '@/lib/types';
@@ -13,6 +16,7 @@ type HomeContentProps = {
 
 export function HomeContent({ posts, areaGroups }: HomeContentProps) {
   const { searchQuery } = useSearch();
+  const router = useRouter();
   const {
     categoryGroup,
     categoryGroups: availableCategoryGroups,
@@ -29,6 +33,17 @@ export function HomeContent({ posts, areaGroups }: HomeContentProps) {
     filteredPosts,
     normalizedQuery,
   } = useMapFilters(posts, searchQuery, areaGroups);
+
+  useEffect(() => {
+    const prefetchTargets = filteredPosts.slice(0, 6);
+    prefetchTargets.forEach((post) => {
+      try {
+        router.prefetch(post.permalink);
+      } catch {
+        // ignore prefetch errors
+      }
+    });
+  }, [filteredPosts, router]);
 
   return (
     <div className="space-y-8">
