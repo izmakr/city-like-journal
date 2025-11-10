@@ -15,8 +15,7 @@ export function PostCard({ post }: { post: Post }) {
           alt={post.title}
           fill
           className="object-cover"
-          unoptimized
-          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 90vw"
         />
       </div>
       <div className="p-4">

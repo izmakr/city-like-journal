@@ -6,7 +6,7 @@ storeName: 'THE LIVELY BAR'
 date: 2025-11-05
 area: 麻布十番
 kind: バー
-cover: https://restaurant.img-ikyu.com/rsDatas/rsData146500/r146426/orig/146426ga10000003.jpg
+cover: /images/posts/azabujuban/thelivelybar/1.jpg
 excerpt: 麻布十番駅からわずか徒歩2分。ホテル最上階に潜む「THE LIVELY BAR」は、夜風と東京タワーの光を味方につける大人の隠れ処。静かな高揚と共に、香り立つ一杯が街のざわめきを遠ざける。
 latitude: 35.65704208501946
 longitude: 139.7331751288356
@@ -24,7 +24,7 @@ nearestStation: 麻布十番駅
 
 そんな細部まで行き届いた美学がここにある。  
 
-![店内の様子](https://www.ozmall.co.jp/restaurant/images/client/7082_7147_ph2.jpg)
+![店内の様子](/images/posts/azabujuban/thelivelybar/2.jpg)
 
 ## 琥珀の氷が溶ける夜、バナナコーヒーの香りに酔う
 シグネチャーカクテルの一杯が、夜景のリズムを変える。
@@ -36,7 +36,7 @@ nearestStation: 麻布十番駅
 一杯ごとに違う“物語”がグラスの中に立ちのぼる。  
 深夜料金の時間帯になっても、その香りの曲線は途切れない。  
 
-![Heian Noble平安貴族もし平安時代のバーでカクテルを振る舞うなら・・・](https://cocktailbar.jp/wp-content/uploads/8dd60e20a1fb25256f269bf1f663c163.jpeg)
+![Heian Noble平安貴族もし平安時代のバーでカクテルを振る舞うなら・・・](/images/posts/azabujuban/thelivelybar/3.jpg)
 
 ## 風を孕むテラス、東京タワーの灯が頬を撫でる
 テラスからは東京タワーが間近に。  
@@ -47,7 +47,7 @@ nearestStation: 麻布十番駅
 オープンテラスとソファ席がほどよい距離感を生み、  
 BGMのジャズが“夜の余白”を整えてくれる。  
 
-![テラスの雰囲気](https://www.ozmall.co.jp/restaurant/images/plan/7082_593617_plan_main2.jpg?t=20251030)
+![テラスの雰囲気](/images/posts/azabujuban/thelivelybar/4.jpg)
 
 ## 二軒目の正解、静けさが語りをほどく場所
 仕事帰り、またはデートの帰り道にふらりと立ち寄れる。  
@@ -86,4 +86,3 @@ BGMのジャズが“夜の余白”を整えてくれる。
 ・チャージ料: 22時以降 深夜料金10%  
 ・公式Instagram: https://www.instagram.com/the_lively_tokyo_azabujuban/  
 
-**OGPコピー:** "東京タワーの灯を映す夜風"

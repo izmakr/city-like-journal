@@ -10,7 +10,7 @@ kind: [イタリアン, ワインバー]
 address: "東京都渋谷区神宮前5-47-6 1F"
 latitude: 35.663934641537885
 longitude: 139.70792017116437
-cover: https://restaurant.img-ikyu.com/rsDatas/rsData114000/r113687/orig/113687ga10000387.jpg?auto=compress%2Cformat&lossless=0&fit=crop&w=1400&h=700
+cover: /images/posts/omotesando/gentledining/1.jpg
 excerpt: "ラグジュアリーでありながら肩肘張らない。『GENTLE Dining』は、光と静けさのバランスが絶妙な表参道の隠れ家。ワインの香りと会話がゆっくりと溶け合う時間を届けてくれる。"
 ---
 
@@ -72,7 +72,7 @@ GENTLEはぴたりと寄り添う。
 週末には予約で満席になることも多いため、  
 特別な日や記念日には早めの予約がおすすめだ。  
 
-## 再訪したくなる理由、それは“余韻の設計”  
+## リピートしたくなる理由、それは“余韻の設計”  
 
 料理の美味しさだけでなく、  
 光・香り・間の取り方までが計算され尽くしている。  

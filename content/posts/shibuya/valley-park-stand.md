@@ -6,7 +6,7 @@ storeName: 'VALLEY PARK STAND'
 date: 2025-11-09
 area: 渋谷
 kind: [カフェ, パン, バー]
-cover: https://harumari.tokyo/wp-content/uploads/2020/12/th-VPS06.jpg
+cover: /images/posts/shibuya/valleyparkstand/1.jpg
 excerpt: 渋谷・宮下パークの屋上に広がる『VALLEY PARK STAND』。光と緑に包まれた開放的な空間で、バスクチーズケーキと香るコーヒーを片手に、都市の喧騒を忘れる時間を過ごす。
 latitude: 35.66344959012703
 longitude: 139.70184270970782
@@ -21,7 +21,6 @@ nearestStation: 渋谷駅
 緑と光が交錯するガラスの空間には、  
 朝の静けさと夕暮れの柔らかな余韻が同居している。
 
----
 
 ## 焦がし香るチーズケーキと、濃いめの一杯
 
@@ -40,7 +39,6 @@ nearestStation: 渋谷駅
 ほの苦い生地にマロンクリームが寄り添い、  
 秋の風を感じるような香りが広がる。
 
----
 
 ## 光と緑がつくる「滞在したくなる静けさ」
 
@@ -61,7 +59,6 @@ nearestStation: 渋谷駅
 午後はPC作業をする人、  
 夜はホテルゲストが一杯のワインを楽しむ姿も。
 
----
 
 ## 渋谷で「休む」を知るカフェ
 
@@ -76,7 +73,6 @@ nearestStation: 渋谷駅
 まるで都市の中にもう一つの「リビング」が生まれたよう。  
 光が変わるたびに、空気の温度まで少しずつ変わっていく。  
 
----
 
 ## 訪れるなら、朝か夕方がおすすめ
 
@@ -92,7 +88,6 @@ nearestStation: 渋谷駅
 キャッシュレスオンリーなので、  
 カードか電子マネーを忘れずに。
 
----
 
 ## 余韻に残るのは「都市の中の余白」
 
@@ -106,7 +101,6 @@ nearestStation: 渋谷駅
 また、あのチーズケーキとコーヒーで、  
 ひと休みしたくなる。
 
----
 
 ・店名: VALLEY PARK STAND（ヴァリーパークスタンド）  
 ・住所: 東京都渋谷区神宮前6-20-10 MIYASHITA PARK North 4F  
@@ -118,4 +112,3 @@ nearestStation: 渋谷駅
 ・駐車場: MIYASHITA PARK駐車場あり  
 ・公式Instagram: [@valleyparkstand](https://www.instagram.com/valleyparkstand/)  
 
----
