@@ -1,8 +1,8 @@
 "use client";
 
-import type { Post } from '@/lib/types';
-import { MapView } from '@/components/MapView';
 import { PostList } from '@/components/PostList';
+import { LazyMapView } from '@/components/LazyMapView';
+import type { Post } from '@/lib/types';
 import { useSearch } from '@/contexts/SearchContext';
 import { useMapFilters } from '@/lib/hooks/useMapFilters';
 
@@ -32,7 +32,7 @@ export function HomeContent({ posts, areaGroups }: HomeContentProps) {
 
   return (
     <div className="space-y-8">
-      <MapView
+      <LazyMapView
         posts={filteredPosts}
         category={category}
         categoryGroup={categoryGroup}

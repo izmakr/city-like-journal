@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Script from 'next/script';
 import { PostContent } from '@/components/PostContent';
 import { Chip } from '@/components/Chip';
-import { PostRouteMap } from '@/components/PostRouteMap';
+import { LazyPostRouteMap } from '@/components/LazyPostRouteMap';
 import { PostCard } from '@/components/PostCard';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { getRelatedPosts } from '@/lib/postRecommendations';
@@ -126,7 +126,7 @@ export default async function PostPage(
       </div>
       {post.latitude !== undefined && post.longitude !== undefined && (
         <div className="mt-12">
-          <PostRouteMap post={post} />
+          <LazyPostRouteMap post={post} />
         </div>
       )}
 

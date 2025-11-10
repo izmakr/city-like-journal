@@ -16,7 +16,7 @@ import {
 
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-type MapViewProps = {
+export type MapViewProps = {
   posts: Post[];
   category?: string;
   categoryGroup?: string;
