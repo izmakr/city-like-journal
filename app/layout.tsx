@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Header } from '@/components/Header';
+import { HeaderClient } from '@/components/HeaderClient';
 import { SearchProvider } from '@/contexts/SearchContext';
 import './globals.css';
 
@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ja">
       <body className="min-h-screen" style={{ backgroundColor: '#0B0E13', color: '#E6EAF2' }}>
         <SearchProvider>
-          <Header />
+          <HeaderClient />
           <div className="pt-16">
             {children}
           </div>

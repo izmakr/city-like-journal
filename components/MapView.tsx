@@ -138,7 +138,7 @@ export function MapView({
         onCategoryGroupChange &&
         onCategoryChange &&
         onAreaGroupChange &&
-        onAreaChange ? (
+        onAreaChange && (
           <PostFilters
             categoryGroups={categoryGroups}
             categories={categories}
@@ -153,7 +153,7 @@ export function MapView({
             onAreaGroupChange={onAreaGroupChange}
             onAreaChange={onAreaChange}
           />
-        ) : null}
+        )}
       </div>
       <div
         ref={containerRef}

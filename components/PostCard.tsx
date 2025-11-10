@@ -1,7 +1,8 @@
 import Image from 'next/image';
-import { Calendar } from 'lucide-react';
 import Link from 'next/link';
+
 import { Chip } from './Chip';
+import { CalendarIcon } from './icons';
 import type { Post } from '@/lib/types';
 import { formatPostDate } from '@/lib/postUtils';
 
@@ -20,7 +21,7 @@ export function PostCard({ post }: { post: Post }) {
       </div>
       <div className="p-4">
         <div className="flex items-center gap-2 text-xs text-gray-400">
-          <Calendar size={14} />
+          <CalendarIcon width={14} height={14} />
           <time>{formatPostDate(post.date)}</time>
         </div>
         <div className="mt-3 flex items-center gap-2 flex-wrap">

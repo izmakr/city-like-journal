@@ -1,9 +1,18 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, Search, X } from 'lucide-react';
-import { useEffect, useState, useRef } from 'react';
-import { SearchBar } from './SearchBar';
+import dynamic from 'next/dynamic';
+import { useEffect, useMemo, useRef, useState } from 'react';
+
+const SearchBar = dynamic(() => import('./SearchBar').then((mod) => mod.SearchBar), {
+  ssr: false,
+  loading: () => <div className="h-10 w-full rounded-lg border border-[#1F2633] bg-[#131823]" />,
+});
+
+const CloseIcon = dynamic(() => import('./icons').then((mod) => mod.CloseIcon));
+const MenuIcon = dynamic(() => import('./icons').then((mod) => mod.MenuIcon));
+const SearchIcon = dynamic(() => import('./icons').then((mod) => mod.SearchIcon));
+
 import { useSearch } from '@/contexts/SearchContext';
 
 export function Header() {
@@ -20,10 +29,10 @@ export function Header() {
       }
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
-        setSearchOpen(true);
+        import('./SearchBar').then(() => setSearchOpen(true));
       }
     };
-    window.addEventListener('keydown', onKey);
+    window.addEventListener('keydown', onKey, { passive: true });
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
@@ -47,11 +56,13 @@ export function Header() {
         <div className="flex items-center gap-2">
           <button
             aria-label="検索"
-            onClick={() => setSearchOpen(true)}
+            onClick={() => {
+              import('./SearchBar').then(() => setSearchOpen(true));
+            }}
             className="h-9 w-9 inline-flex items-center justify-center rounded-lg border flex-shrink-0 transition-colors hover:bg-[#131823]"
             style={{ borderColor: '#1F2633' }}
           >
-            <Search size={18} />
+            <SearchIcon width={18} height={18} />
           </button>
 
           <button
@@ -61,7 +72,7 @@ export function Header() {
             className={`h-9 w-9 inline-flex items-center justify-center rounded-lg border flex-shrink-0 transition-colors hover:bg-[#131823]`}
             style={{ borderColor: '#1F2633' }}
           >
-            <Menu size={18} />
+            <MenuIcon width={18} height={18} />
           </button>
         </div>
       </div>
@@ -87,7 +98,7 @@ export function Header() {
                   className="h-9 w-9 inline-flex items-center justify-center rounded-lg border flex-shrink-0 transition-colors hover:bg-[#131823]"
                   style={{ borderColor: '#1F2633' }}
                 >
-                  <X size={18} />
+                  <CloseIcon width={18} height={18} />
                 </button>
               </div>
             </div>

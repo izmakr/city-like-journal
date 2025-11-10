@@ -28,7 +28,7 @@ const formatSummary = (groupValue: string, itemValue: string, allLabel = 'すべ
   return groupValue;
 };
 
-export const PostFilters = ({
+const PostFiltersInner = ({
   categoryGroups,
   categories,
   areaGroups,
@@ -200,5 +200,8 @@ export const PostFilters = ({
     </div>
   );
 };
+
+export const PostFilters = (props: PostFiltersProps) => <PostFiltersInner {...props} />;
+
 
 

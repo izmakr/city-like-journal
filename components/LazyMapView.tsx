@@ -6,15 +6,9 @@ import { useEffect, useRef, useState } from "react";
 import type { MapViewProps } from "@/components/MapView";
 
 const MapViewSkeleton = () => (
-  <div className="space-y-4">
-    <div className="space-y-3">
-      <div className="h-5 w-32 rounded bg-slate-800 animate-pulse" />
-      <div className="h-12 rounded-2xl border border-slate-800 bg-slate-900" />
-    </div>
-    <div className="relative h-[420px] w-full overflow-hidden rounded-3xl border border-slate-800 bg-slate-900">
-      <div className="absolute inset-0 flex items-center justify-center text-sm text-gray-400">
-        マップを読み込み中…
-      </div>
+  <div className="relative h-[420px] w-full overflow-hidden rounded-3xl border border-slate-800 bg-slate-900">
+    <div className="absolute inset-0 flex items-center justify-center text-sm text-gray-400">
+      マップを読み込み中…
     </div>
   </div>
 );

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+
+import { ChevronDownIcon } from './icons';
 
 interface SelectProps {
   value: string;
@@ -47,8 +48,9 @@ export function Select({ value, onChange, options, allLabel }: SelectProps) {
       >
         <span className="truncate pr-2">{selectedLabel}</span>
         <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-          <ChevronDown
-            size={16}
+          <ChevronDownIcon
+            width={16}
+            height={16}
             className={`text-gray-400 transition-transform duration-200 ${
               isOpen ? 'rotate-180' : ''
             }`}
