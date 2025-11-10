@@ -225,7 +225,7 @@ export function PostContent({ content }: PostContentProps) {
                   alt={block.alt || ''}
                   fill
                   className="object-cover"
-                  sizes="(min-width: 1024px) 768px, 100vw"
+                  sizes="(min-width: 1280px) 720px, (min-width: 1024px) 75vw, (min-width: 768px) 85vw, 95vw"
                 />
               </div>
               {block.alt && (

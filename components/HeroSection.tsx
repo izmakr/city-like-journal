@@ -56,7 +56,7 @@ export function HeroSection() {
               fill
               priority={index === 0}
               loading={index === 0 ? 'eager' : 'lazy'}
-              sizes="(min-width: 1024px) 1100px, (min-width: 768px) 90vw, 100vw"
+              sizes="(min-width: 1280px) 1200px, (min-width: 1024px) 90vw, (min-width: 768px) 95vw, 100vw"
               className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-[#13182333] to-[#0b0e13e6]" />
