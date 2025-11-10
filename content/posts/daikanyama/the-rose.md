@@ -6,7 +6,7 @@ storeName: 'THE ROSE'
 date: 2025-11-08
 area: 代官山
 kind: [イタリアン, ダイニングバー]
-cover: https://restaurant.img-ikyu.com/rsDatas/rsData115000/r114663/orig/114663ga10000377.jpg?auto=compress%2Cformat&lossless=0&fit=crop&w=1400&h=700
+cover: /images/posts/daikanyama/therose/1.jpg
 excerpt: 食材を“選ぶ”ところから始まるディナー。薔薇が飾る一軒家で、会話と香りが編むオーダーメイドの夜を。
 latitude: 35.651695764900204
 longitude: 139.696200555822
@@ -90,7 +90,7 @@ OMAKASEコースは6品で8,800円前後。
 昼の光に包まれた薔薇の邸宅は、  
 また違う表情を見せてくれる。  
 
-## まとめ ― 二度と同じ夜がないから、また来たくなる  
+## 二度と同じ夜がないから、また来たくなる  
 
 同じコースを頼んでも、  
 選ぶ素材も、香りも、余韻も変わる。  
@@ -101,7 +101,6 @@ OMAKASEコースは6品で8,800円前後。
 次に訪れるとき、どんな味に出会えるだろう。  
 そう思わせてくれる一軒が、代官山にある。  
 
----
 
 ・店名: THE ROSE  
 ・住所: 東京都渋谷区鉢山町13-16 MAISON ROSE 1F・2F  
@@ -116,5 +115,3 @@ OMAKASEコースは6品で8,800円前後。
 ・備考: 全席禁煙／1Fはペット同伴可（要確認）／Wi-Fiあり  
 ・公式サイト: [http://maisonrose.jp](http://maisonrose.jp)  
 ・Instagram: [@therose__official](https://www.instagram.com/therose__official/)  
-
-**OGPコピー:** "選ぶほど、美味しくなる夜"

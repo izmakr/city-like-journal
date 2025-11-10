@@ -6,7 +6,7 @@ storeName: 'DRAエイトマン'
 date: 2025-11-05
 area: 渋谷
 kind: イタリアン
-cover: https://static.rtrp.jp/article/135085/images/135085f5535d9d-e0d1-49b4-9026-dcf9cbdd68a8_m.jpg
+cover: /images/posts/shibuya/dra8man/1.jpg
 excerpt: 渋谷MIYASHITA PARKの3階。ライトアップされたテラスに風が抜け、グラスの中でワインがきらめく。DRAエイトマンはカジュアルに過ごせる大人の“食堂”。牛レアカツや窯焼きピザを、夜景と一緒に楽しむ時間がここにある。
 latitude: 35.66294773664997
 longitude: 139.70186366210632
@@ -23,7 +23,7 @@ nearestStation: 渋谷駅
 仲間と軽く一杯、でも料理は本気。  
 そんな夜にぴったりの店だ。  
 
-![店内の様子](https://s-moon.co.jp/wp-content/uploads/2020/12/%EF%BD%B6%EF%BD%B3%EF%BE%9D%EF%BE%80%EF%BD%B02DSC_0089-600x402.jpg)
+![店内の様子](/images/posts/shibuya/dra8man/2.jpg)
 
 ## 山椒の香り、レアカツが主役の夜
 赤ワインソースの香ばしさに思わずグラスが進む。
@@ -39,7 +39,7 @@ nearestStation: 渋谷駅
 
 個人的イチオシは圧倒的に「ロッシーニ」
 
-![看板メニュー](https://tblg.k-img.com/resize/640x360c/restaurant/images/Rvw/271725/86774b3ce67bde6d9d0ab6f9d5f4629d.jpg?token=3ec87ea&api=v2)
+![看板メニュー](/images/posts/shibuya/dra8man/3.jpg)
 
 ## 渋谷の風を感じるテラスで乾杯
 ネオンと風が混ざる時間、グラスがきらめく。
@@ -53,7 +53,6 @@ BGMはゆるめのハウス、
 渋谷の街を眺めながら、  
 ピザの焼ける香りが風に乗ってくる。  
 
-![店内の雰囲気](https://images.unsplash.com/photo-1606788075761-7a07f5b17c2b?auto=format&fit=crop&w=1600&q=80)
 
 ## 会話が弾む、フレンドリーな空気
 スタッフの明るさが夜を軽くしてくれる。
@@ -98,5 +97,3 @@ BGMはゆるめのハウス、
 ・アクセス: 渋谷駅より徒歩2分  
 ・チャージ料: 495円（税込）  
 ・公式Instagram: [@dra_8man](https://www.instagram.com/dra_8man/)
-
-**OGPコピー:** "渋谷の風とワインの香り、DRAの夜"

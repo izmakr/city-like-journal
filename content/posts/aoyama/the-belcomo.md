@@ -6,7 +6,7 @@ storeName: 'THE BELCOMO'
 date: 2025-11-08
 area: 青山
 kind: [ダイニングバー,カフェ,多国籍料理]
-cover: 'https://livedoor.blogimg.jp/tsudachie/imgs/8/0/80d4e3fa-s.jpg'
+cover: '/images/posts/aoyama/belcomo/belcomo-1.jpg'
 excerpt: 青山グランドホテル4F。世界の味が交差する『THE BELCOMO』では、朝の光と香りがゆっくりとほどけていく。ふわもちパンケーキに、真鯛のカルパッチョ。日本の素材が異国の息吹を纏う、ホテル発の多国籍ダイニング。
 latitude: 35.669681330540605
 longitude: 139.71598248650682
@@ -37,7 +37,7 @@ nearestStation: 外苑前駅
 口に運ぶと苦みとミルクの甘みが滑らかに溶け合う。  
 ホテルの朝にふさわしい、静かな幸福の味だ。  
 
-![](https://aoyamagrand.com/wp-content/uploads/unnamed-12.jpg)
+![](/images/posts/aoyama/belcomo/belcomo-2.jpg)
 
 ランチタイムになると、空気は少し色づく。  
 「愛媛県産桜鯛のカルパッチョ」には  
@@ -59,7 +59,7 @@ nearestStation: 外苑前駅
 季節の変わり目でも安心して過ごせる。  
 ホテルらしいホスピタリティが息づいているのが心地よい。  
 
-![](https://東京カフェブログ.com/wp-content/uploads/2020/08/img_5f324a5a17072.jpg)
+![](/images/posts/aoyama/belcomo/belcomo-3.png)
 
 休日のブランチでは、  
 シャンパンを片手にパンケーキをシェアするカップル、  
@@ -92,7 +92,7 @@ BGMはジャズでもボサノヴァでもなく、
 ミスがあっても柔らかい笑顔で丁寧に対応してくれる。  
 その所作の一つひとつが、空間の“静けさ”を保っている。  
 
-![](https://img.hanako.tokyo/2024/10/12004302/C3A9044-1.jpg)
+![](/images/posts/aoyama/belcomo/belcomo-4.jpg)
 
 訪問するなら、朝は8〜10時のモーニングが狙い目。  
 昼の混雑前に、光が一番美しく差し込む時間だ。  
@@ -102,7 +102,7 @@ BGMはジャズでもボサノヴァでもなく、
 青山の朝を特別にしたいなら、それくらいがちょうどいい。
 
 
-## 光が記憶に変わる場所、再訪の理由
+## 光が記憶に変わる場所
 
 食後のカップに残るエスプレッソの香り。  
 テーブルに映る柔らかな陽。  
@@ -123,6 +123,3 @@ BGMはジャズでもボサノヴァでもなく、
 ・営業時間: ¥8:00〜23:00  
 ・予算: ランチ￥2,000〜2,999／ディナー￥6,000〜7,999  
 ・アクセス: 外苑前駅徒歩3分／表参道駅徒歩8分  
-・公式サイト: [https://aoyamagrand.com/restaurants/the-belcomo/](https://aoyamagrand.com/restaurants/the-belcomo/)  
-
-**OGPコピー:** "青山の光を味わうホテルダイニング"

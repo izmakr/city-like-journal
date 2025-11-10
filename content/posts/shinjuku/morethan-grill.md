@@ -6,7 +6,7 @@ storeName: 'MORETHAN GRILL'
 date: 2025-11-08
 area: 新宿
 kind: [ダイニングバー, イタリアン]
-cover: https://mothers-place.com/wp-content/uploads/2024/04/4R3A3155.jpg
+cover: /images/posts/shinjuku/morethangrill/1.jpg
 excerpt: "ホテル『THE KNOT TOKYO Shinjuku』の2階にある『MORETHAN GRILL』。新宿中央公園の緑を一望できる開放的な空間で、炭火の香りと素材の旨味が広がるグリルを堪能できる。心地よい光と丁寧なサービスが織りなす、都会の隠れ家ランチ。"
 latitude: 35.688520629053535
 longitude: 139.688422855822
@@ -21,7 +21,6 @@ nearestStation: 都庁前駅
 「MORETHAN GRILL」は、西新宿のホテル〈THE KNOT TOKYO Shinjuku〉の2階に佇むダイニング。  
 都会の中心にいながら、まるで別世界に迷い込んだような“ゆとりの時間”がここにはある。
 
----
 
 ## 炭火の香りと旬を楽しむ、五感に届くグリルランチ
 
@@ -41,7 +40,6 @@ nearestStation: 都庁前駅
 フムスのように見えて豆腐を使ったディップが添えられ、  
 和のニュアンスをさりげなく織り込むのもこの店らしい。  
 
----
 
 ## 緑に包まれた、都会とは思えない静けさ
 
@@ -57,7 +55,6 @@ nearestStation: 都庁前駅
 穏やかなBGMとスタッフの落ち着いた所作が、  
 ホテルレストランならではの上質さを感じさせる。  
 
----
 
 ## デートにも、ひとり時間にも。  
 ### “大人の余白”を楽しむ場所
@@ -73,9 +70,8 @@ nearestStation: 都庁前駅
 あるいは自分へのご褒美ランチにも最適。  
 日常の延長線上に“非日常”がふと現れるような時間が過ごせる。  
 
----
 
-## 訪問のコツと再訪したくなる理由
+## 訪問のコツ
 
 ・ランチは事前予約必須（特に平日でも満席になりやすい）  
 ・コースは約1時間半〜2時間で、量も満足感あり  
@@ -91,7 +87,6 @@ nearestStation: 都庁前駅
 
 この静けさこそ、MORETHAN GRILLの真価だ。
 
----
 
 ・店名: MORETHAN GRILL  
 ・住所: 東京都新宿区西新宿4-31-1 THE KNOT TOKYO Shinjuku 2F  
