@@ -2,6 +2,13 @@ export type Post = {
   id: string;
   slug: string;
   title: string;
+  storeName: string;
+  storeNameShort?: string;
+  citySlug: string;
+  areaSlug: string;
+  categorySlug: string;
+  storeSlug: string;
+  permalink: string;
   date: string; // ISO
   area: string; // エリア
   areaGroup: string; // 大カテゴリ
@@ -15,12 +22,30 @@ export type Post = {
   nearestStation?: string;
 };
 
+const isNonEmptyString = (value: unknown): value is string => typeof value === 'string' && value.trim().length > 0;
+
 export const isPost = (value: unknown): value is Post => {
   if (!value || typeof value !== 'object') return false;
   const candidate = value as Record<string, unknown>;
-  const requiredStrings: (keyof Post)[] = ['id', 'slug', 'title', 'date', 'area', 'areaGroup', 'cover', 'excerpt', 'content'];
+  const requiredStrings: (keyof Post)[] = [
+    'id',
+    'slug',
+    'title',
+    'storeName',
+    'citySlug',
+    'areaSlug',
+    'categorySlug',
+    'storeSlug',
+    'permalink',
+    'date',
+    'area',
+    'areaGroup',
+    'cover',
+    'excerpt',
+    'content',
+  ];
 
-  if (!requiredStrings.every((key) => typeof candidate[key] === 'string')) {
+  if (!requiredStrings.every((key) => isNonEmptyString(candidate[key]))) {
     return false;
   }
 
@@ -34,7 +59,7 @@ export const isPost = (value: unknown): value is Post => {
     return false;
   }
 
-  const optionalStringKeys: (keyof Post)[] = ['address', 'nearestStation'];
+  const optionalStringKeys: (keyof Post)[] = ['address', 'nearestStation', 'storeNameShort'];
   if (!optionalStringKeys.every((key) => candidate[key] === undefined || typeof candidate[key] === 'string')) {
     return false;
   }

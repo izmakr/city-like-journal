@@ -2,7 +2,8 @@
 id: azabujuban-livelybar
 slug: azabujuban/livelybar
 title: 東京タワーの灯を映す、麻布十番の夜気
-date: 2025-11-05T00:00:00.000Z
+storeName: 'THE LIVELY BAR'
+date: 2025-11-05
 area: 麻布十番
 kind: バー
 cover: https://restaurant.img-ikyu.com/rsDatas/rsData146500/r146426/orig/146426ga10000003.jpg

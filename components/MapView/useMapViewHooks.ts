@@ -327,7 +327,7 @@ export const usePostsLayer = ({
           <div class="citylike-popup__body">
             <h3 class="citylike-popup__title">${post.title}</h3>
             <p class="citylike-popup__meta">${post.area}${post.address ? ` ｜ ${post.address}` : ''}</p>
-            <a class="citylike-popup__link" href="/posts/${post.slug}">記事を見る</a>
+            <a class="citylike-popup__link" href="${post.permalink}">記事を見る</a>
           </div>
         `.trim();
 

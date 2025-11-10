@@ -1,6 +1,14 @@
+import type { Metadata } from 'next';
 import { getPosts, getAreaGroups } from '@/lib/data';
 import { HeroSection } from '@/components/HeroSection';
 import { HomeContent } from '@/components/HomeContent';
+
+export const metadata: Metadata = {
+  title: {
+    absolute: '東京のカフェ・バー案内｜City Like Journal',
+  },
+  description: '東京のカフェやバーを中心に、大人の街歩きに似合うスポットを厳選紹介。エリアとカテゴリから次の一軒を見つける City Like Journal。',
+};
 
 export default function Page() {
   // 開発環境では毎回最新の記事を取得

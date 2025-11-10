@@ -2,6 +2,7 @@
 id: aoyama-the-belcomo
 slug: aoyama/the-belcomo
 title: 青山の朝を贅沢にほどく、光と香りのオールデイダイニング
+storeName: 'THE BELCOMO'
 date: 2025-11-08
 area: 青山
 kind: [ダイニングバー,カフェ,多国籍料理]

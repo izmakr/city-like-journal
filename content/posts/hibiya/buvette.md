@@ -2,6 +2,7 @@
 id: hibiya-buvette  
 slug: hibiya/buvette  
 title: "日比谷で感じる、パリの余韻が香るブランチ"  
+storeName: 'Buvette'  
 date: 2025-11-09  
 area: 日比谷  
 nearestStation: 日比谷駅  

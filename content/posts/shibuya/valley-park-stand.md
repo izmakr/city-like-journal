@@ -2,6 +2,7 @@
 id: shibuya-valley-park-stand
 slug: shibuya/valley-park-stand
 title: 渋谷の空と緑に溶け込む、静寂のカフェ時間。
+storeName: 'VALLEY PARK STAND'
 date: 2025-11-09
 area: 渋谷
 kind: [カフェ, パン, バー]

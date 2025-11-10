@@ -47,12 +47,22 @@ npm run dev
   - 例: `content/posts/shibuya/dra8man.md`
 - frontmatter の主要項目
   - `id`: ハイフン区切りの内部 ID
-  - `slug`: `エリア/スポット` 形式（公開 URL に利用）
+  - `slug`: `エリア/スポット` 形式（公開 URL のもとになる英字スラッグ）  
+    - 先頭がエリアスラッグ（例: `shibuya`）、末尾が店舗スラッグ（例: `dra8man`）になります。
+  - `storeName`: 店舗名（必須）
+  - `storeNameShort`: 任意。店名が 30 文字を超える場合に短縮名を指定（未指定でも自動補完）
   - `title`, `date`, `excerpt`, `cover`, `content`
-  - `area`: 表示用エリア名
-  - `kind`: カテゴリ配列（マップ・フィルターで利用）
+  - `area`: 表示用エリア名（例: `渋谷`）
+  - `kind`: カテゴリ配列（マップ・フィルターで利用）  
+    - `lib/categories.ts` に掲載されている名称を使用してください。先頭の要素が URL のカテゴリ階層に反映されます。
   - `nearestStation`: 駅名（座標は `lib/stations.ts` から補完）
-  - `latitude`, `longitude`: 任意。指定しなければ駅座標で補完可（必要に応じて手入力）
+  - `latitude`, `longitude`: 任意。スポットの緯度経度（必要に応じて手入力）
+
+`lib/data.ts` が frontmatter を解析し、以下の情報を自動算出します。
+
+- `citySlug`, `areaSlug`, `categorySlug`, `storeSlug`: `/tokyo/<area>/<category>/<store>/` 用のスラッグ
+- `permalink`: 新URL（例: `/tokyo/shibuya/cafe/dra8man/`）
+- `storeNameShort`: 未設定かつ店名が長い場合は、自動で30文字以内に収まる短縮形を生成
 
 `lib/data.ts` が記事読み込みを担当しており、`gray-matter` で frontmatter を解析 → `isPost` 型ガードで安全性を確認した上で `Post` 型に整形します。
 
@@ -65,6 +75,24 @@ npm run dev
 - `lib/categories.ts`  
   - `CATEGORY_DEFINITIONS` に表示用グループ・アイコン・カラーを定義。  
   - マーカー表示やフィルターのグループ／サブカテゴリ候補に利用されます。
+
+### サイトマップ & robots
+
+- `app/sitemap.ts` が `sitemap.xml` を自動生成します。  
+  - 新しい記事を追加したらデプロイ後に `https://citylikejournal.com/sitemap.xml` を Search Console へ送信してください。
+- `app/robots.ts` は `robots.txt` を出力します。  
+  - 追加のクローラー制御が必要になった場合はこのファイルを編集します。
+
+### ページ構成（URL 階層）
+
+- `/tokyo/`：東京全体のハブページ。エリア一覧＋最新スポットを表示。
+- `/tokyo/[area]/`：エリア別ページ。カテゴリでフィルタでき、該当記事を PostCard で表示。
+- `/tokyo/[area]/[category]/`：エリア×カテゴリの一覧ページ。
+- `/tokyo/[area]/[category]/[store]/`：記事詳細ページ。
+- `/category/`：カテゴリ一覧ページ。カテゴリごとの記事数を表示。
+- `/category/[category]/`：カテゴリ詳細ページ。対象カテゴリの記事一覧を表示。
+
+パンくずナビゲーションは上記階層に合わせて `Home / 東京 / エリア / カテゴリ / 店舗` を表示し、JSON-LD (`BreadcrumbList`) も付与しています。
 
 ### 駅座標
 

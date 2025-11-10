@@ -2,6 +2,7 @@
 id: shibuya-dra8man
 slug: shibuya/dra8man
 title: 程よくカジュアル、だが美味い、渋谷のちょうどいいビストロ
+storeName: 'DRAエイトマン'
 date: 2025-11-05
 area: 渋谷
 kind: イタリアン
