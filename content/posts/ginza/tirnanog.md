@@ -6,7 +6,7 @@ storeName: 'ティル・ナ・ノーグ'
 date: 2025-11-06
 area: 銀座
 kind: [バー, カフェ]
-cover: /images/posts/ginza/tirnanog/1.jpg
+cover: /images/posts/ginza/tirnanog/1.webp
 excerpt: "重たい扉の向こうは、妖精たちが息づく異世界。『ティル・ナ・ノーグ』は、銀座の地下に潜む幻想のバー。泡に光が宿り、現実が少しずつ溶けていく。"
 latitude: 35.670381140966306
 longitude: 139.76570871349318

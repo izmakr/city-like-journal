@@ -6,7 +6,7 @@ storeName: '/DRAFT'
 date: 2025-11-04
 area: 恵比寿
 kind: バー
-cover:  /images/posts/ebisu/draft/1.jpg
+cover:  /images/posts/ebisu/draft/1.webp
 excerpt: ふわりと漂う柚子の香りに、胸の奥がやさしく解けていく。恵比寿駅のざわめきを背に、わずか1分で辿り着くとは思えない静けさがそこにあった。
 latitude: 35.646526806075784
 longitude: 139.70924003326587
@@ -20,7 +20,7 @@ nearestStation: 恵比寿駅
 
 店の名は「**/DRAFT（ドラフト）**」。日本のお酒だけを扱う、隠れ家のようなバーだ。
 
-![店内の様子](/images/posts/ebisu/draft/2.jpg)
+![店内の様子](/images/posts/ebisu/draft/2.webp)
 
 ## 焼酎が"和のカクテル"に生まれ変わる瞬間
 
@@ -30,7 +30,7 @@ nearestStation: 恵比寿駅
 
 香ばしい焦がし柚子をまとった「**クールミントグリーン**」は、芋焼酎の深みと果実の香りが重なり、まるで風に混じるバナナの甘い風のよう。
 
-![](/images/posts/ebisu/draft/3.jpg)
+![](/images/posts/ebisu/draft/3.webp)
 
 白桃を使った季節のカクテルは、口に含むと果実の瑞々しさが弾け、あとからふわりと山椒の余韻が残る。
 
@@ -43,7 +43,7 @@ nearestStation: 恵比寿駅
 店内はやわらかな灯りに包まれ、カウンターに反射するボトルの色が静かなリズムを刻む。
 恵比寿駅前とは思えないほど落ち着いていて、まるで"都会の音が消える魔法"がかけられているよう。
 
-![](/images/posts/ebisu/draft/4.jpg)
+![](/images/posts/ebisu/draft/4.webp)
 
 奥には個室やテラス席もあり、夜風に触れながら飲む一杯も格別だ。
 お酒を選ぶ時間さえ、この店ではひとつの体験になる。

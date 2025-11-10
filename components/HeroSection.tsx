@@ -5,19 +5,19 @@ import { useEffect, useState } from 'react';
 
 const HERO_IMAGES = [
   {
-    src: '/images/common/hero1.png',
+    src: '/images/common/hero1.webp',
     alt: 'レストランの内観',
   },
   {
-    src: '/images/common/hero2.png',
+    src: '/images/common/hero2.webp',
     alt: '最上級のスイーツカフェ',
   },
   {
-    src: '/images/common/hero3.png',
+    src: '/images/common/hero3.webp',
     alt: '照明に照らされた店内の様子',
   },
   {
-    src: '/images/common/hero4.png',
+    src: '/images/common/hero4.webp',
     alt: '綺麗なバーの外観',
   },
 ] as const;
@@ -55,6 +55,7 @@ export function HeroSection() {
               alt={alt}
               fill
               priority={index === 0}
+              fetchPriority={index === 0 ? 'high' : 'auto'}
               loading={index === 0 ? 'eager' : 'lazy'}
               sizes="(min-width: 1280px) 1200px, (min-width: 1024px) 90vw, (min-width: 768px) 95vw, 100vw"
               className="object-cover"

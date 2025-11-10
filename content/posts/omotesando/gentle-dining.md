@@ -10,7 +10,7 @@ kind: [イタリアン, ワインバー]
 address: "東京都渋谷区神宮前5-47-6 1F"
 latitude: 35.663934641537885
 longitude: 139.70792017116437
-cover: /images/posts/omotesando/gentledining/1.jpg
+cover: /images/posts/omotesando/gentledining/1.webp
 excerpt: "ラグジュアリーでありながら肩肘張らない。『GENTLE Dining』は、光と静けさのバランスが絶妙な表参道の隠れ家。ワインの香りと会話がゆっくりと溶け合う時間を届けてくれる。"
 ---
 

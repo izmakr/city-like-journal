@@ -6,7 +6,7 @@ storeName: 'THE BELCOMO'
 date: 2025-11-08
 area: 青山
 kind: [ダイニングバー,カフェ,多国籍料理]
-cover: '/images/posts/aoyama/belcomo/belcomo-1.jpg'
+cover: '/images/posts/aoyama/belcomo/belcomo-1.webp'
 excerpt: 青山グランドホテル4F。世界の味が交差する『THE BELCOMO』では、朝の光と香りがゆっくりとほどけていく。ふわもちパンケーキに、真鯛のカルパッチョ。日本の素材が異国の息吹を纏う、ホテル発の多国籍ダイニング。
 latitude: 35.669681330540605
 longitude: 139.71598248650682
@@ -37,7 +37,7 @@ nearestStation: 外苑前駅
 口に運ぶと苦みとミルクの甘みが滑らかに溶け合う。  
 ホテルの朝にふさわしい、静かな幸福の味だ。  
 
-![](/images/posts/aoyama/belcomo/belcomo-2.jpg)
+![](/images/posts/aoyama/belcomo/belcomo-2.webp)
 
 ランチタイムになると、空気は少し色づく。  
 「愛媛県産桜鯛のカルパッチョ」には  
@@ -59,7 +59,7 @@ nearestStation: 外苑前駅
 季節の変わり目でも安心して過ごせる。  
 ホテルらしいホスピタリティが息づいているのが心地よい。  
 
-![](/images/posts/aoyama/belcomo/belcomo-3.png)
+![](/images/posts/aoyama/belcomo/belcomo-3.webp)
 
 休日のブランチでは、  
 シャンパンを片手にパンケーキをシェアするカップル、  
@@ -92,7 +92,7 @@ BGMはジャズでもボサノヴァでもなく、
 ミスがあっても柔らかい笑顔で丁寧に対応してくれる。  
 その所作の一つひとつが、空間の“静けさ”を保っている。  
 
-![](/images/posts/aoyama/belcomo/belcomo-4.jpg)
+![](/images/posts/aoyama/belcomo/belcomo-4.webp)
 
 訪問するなら、朝は8〜10時のモーニングが狙い目。  
 昼の混雑前に、光が一番美しく差し込む時間だ。  

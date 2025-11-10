@@ -6,7 +6,7 @@ storeName: 'DRAエイトマン'
 date: 2025-11-05
 area: 渋谷
 kind: イタリアン
-cover: /images/posts/shibuya/dra8man/1.jpg
+cover: /images/posts/shibuya/dra8man/1.webp
 excerpt: 渋谷MIYASHITA PARKの3階。ライトアップされたテラスに風が抜け、グラスの中でワインがきらめく。DRAエイトマンはカジュアルに過ごせる大人の“食堂”。牛レアカツや窯焼きピザを、夜景と一緒に楽しむ時間がここにある。
 latitude: 35.66294773664997
 longitude: 139.70186366210632
@@ -23,7 +23,7 @@ nearestStation: 渋谷駅
 仲間と軽く一杯、でも料理は本気。  
 そんな夜にぴったりの店だ。  
 
-![店内の様子](/images/posts/shibuya/dra8man/2.jpg)
+![店内の様子](/images/posts/shibuya/dra8man/2.webp)
 
 ## 山椒の香り、レアカツが主役の夜
 赤ワインソースの香ばしさに思わずグラスが進む。
@@ -39,7 +39,7 @@ nearestStation: 渋谷駅
 
 個人的イチオシは圧倒的に「ロッシーニ」
 
-![看板メニュー](/images/posts/shibuya/dra8man/3.jpg)
+![看板メニュー](/images/posts/shibuya/dra8man/3.webp)
 
 ## 渋谷の風を感じるテラスで乾杯
 ネオンと風が混ざる時間、グラスがきらめく。

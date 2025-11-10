@@ -6,7 +6,7 @@ storeName: 'MORETHAN GRILL'
 date: 2025-11-08
 area: 新宿
 kind: [ダイニングバー, イタリアン]
-cover: /images/posts/shinjuku/morethangrill/1.jpg
+cover: /images/posts/shinjuku/morethangrill/1.webp
 excerpt: "ホテル『THE KNOT TOKYO Shinjuku』の2階にある『MORETHAN GRILL』。新宿中央公園の緑を一望できる開放的な空間で、炭火の香りと素材の旨味が広がるグリルを堪能できる。心地よい光と丁寧なサービスが織りなす、都会の隠れ家ランチ。"
 latitude: 35.688520629053535
 longitude: 139.688422855822

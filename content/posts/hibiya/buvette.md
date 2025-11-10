@@ -10,7 +10,7 @@ kind: [ビストロ, カフェ, ワインバー]
 address: "東京都千代田区有楽町1-1-2 東京ミッドタウン日比谷 1F"  
 latitude: 35.673930984728166  
 longitude: 139.75917619979586  
-cover: /images/posts/hibiya/buvette/1.jpg  
+cover: /images/posts/hibiya/buvette/1.webp  
 excerpt: "日比谷ミッドタウンの一角に佇む『Buvette』。パリの街角を思わせる温もりの中で、半熟卵がとろけるクロックマダムとワインの余韻に包まれるブランチを。"  
 ---
 

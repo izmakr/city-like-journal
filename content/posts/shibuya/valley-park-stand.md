@@ -6,7 +6,7 @@ storeName: 'VALLEY PARK STAND'
 date: 2025-11-09
 area: 渋谷
 kind: [カフェ, パン, バー]
-cover: /images/posts/shibuya/valleyparkstand/1.jpg
+cover: /images/posts/shibuya/valleyparkstand/1.webp
 excerpt: 渋谷・宮下パークの屋上に広がる『VALLEY PARK STAND』。光と緑に包まれた開放的な空間で、バスクチーズケーキと香るコーヒーを片手に、都市の喧騒を忘れる時間を過ごす。
 latitude: 35.66344959012703
 longitude: 139.70184270970782

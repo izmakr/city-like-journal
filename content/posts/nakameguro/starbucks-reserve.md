@@ -7,7 +7,7 @@ storeNameShort: 'スターバックス リザーブ'
 date: 2025-11-07
 area: 中目黒
 kind: [カフェ, バー]
-cover: '/images/posts/nakameguro/starbucks-reserve/1.jpg'
+cover: '/images/posts/nakameguro/starbucks-reserve/1.webp'
 excerpt: 豆の香りが街を満たす。4フロアにわたる『スターバックス リザーブ ロースタリー トウキョウ』は、もはや“カフェ”ではなく“体験”。焙煎の音、コーヒーの香り、光のきらめき——五感で味わう東京の焙煎劇場。
 latitude: 35.64928009562701
 longitude: 139.6926082

@@ -6,7 +6,7 @@ storeName: 'THE ROSE'
 date: 2025-11-08
 area: 代官山
 kind: [イタリアン, ダイニングバー]
-cover: /images/posts/daikanyama/therose/1.jpg
+cover: /images/posts/daikanyama/therose/1.webp
 excerpt: 食材を“選ぶ”ところから始まるディナー。薔薇が飾る一軒家で、会話と香りが編むオーダーメイドの夜を。
 latitude: 35.651695764900204
 longitude: 139.696200555822

@@ -6,7 +6,7 @@ storeName: 'THE GREY ROOM'
 date: 2025-11-05
 area: 銀座
 kind: [バー, カフェ]
-cover: /images/posts/ginza/grayroom/1.jpg
+cover: /images/posts/ginza/grayroom/1.webp
 excerpt: 銀座の最上階、灰色に沈む光の中でスパイスと氷が語り合う。『THE GREY ROOM』は、香りと静寂が交錯する大人のバー。グラス越しの夜景とともに、記憶をゆっくり解かす場所だ。
 latitude: 35.67177448979108
 longitude: 139.76191104232882
@@ -25,7 +25,7 @@ nearestStation: 銀座駅
 “スパイスミクソロジー”をテーマにしたカクテルや、  
 インディアンウイスキー〈アムルット〉が静かに息づく。
 
-![店内の様子](/images/posts/ginza/grayroom/2.jpg)
+![店内の様子](/images/posts/ginza/grayroom/2.webp)
 
 ## 琥珀がほどける夜、アムルットが語る灰の余韻  
 香りが層をなし、氷の透明が時間を遅くする。  
@@ -46,7 +46,7 @@ nearestStation: 銀座駅
 テラスに出れば、加熱式の煙が細く伸び、  
 グラスの琥珀とともに夜が深まる。  
 
-![](/images/posts/ginza/grayroom/3.jpg)
+![](/images/posts/ginza/grayroom/3.webp)
 
 照明は低く、音楽は揺らぎの少ないエレクトロ。  
 温度も声も抑えめで、隣の会話がほどよく溶ける距離感。  
@@ -59,7 +59,7 @@ nearestStation: 銀座駅
 繊細なスイーツとセイボリーが並ぶスタンドは、  
 まるで美術館の展示品のよう。  
 
-![](/images/posts/ginza/grayroom/4.jpg)
+![](/images/posts/ginza/grayroom/4.webp)
 
 茶葉の香り、スパイスの陰影、皿の温度。  
 スタッフの所作に流れる“間”までもが、味の一部となる。  
