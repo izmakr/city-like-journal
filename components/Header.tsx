@@ -1,17 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const SearchBar = dynamic(() => import('./SearchBar').then((mod) => mod.SearchBar), {
-  ssr: false,
-  loading: () => <div className="h-10 w-full rounded-lg border border-[#1F2633] bg-[#131823]" />,
-});
-
-const CloseIcon = dynamic(() => import('./icons').then((mod) => mod.CloseIcon));
-const MenuIcon = dynamic(() => import('./icons').then((mod) => mod.MenuIcon));
-const SearchIcon = dynamic(() => import('./icons').then((mod) => mod.SearchIcon));
+import { SearchBar } from './SearchBar';
+import { CloseIcon, MenuIcon, SearchIcon } from './icons';
 
 import { useSearch } from '@/contexts/SearchContext';
 
