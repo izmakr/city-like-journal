@@ -37,7 +37,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative overflow-hidden border p-8 md:p-12 lg:p-16 mb-8 min-h-[540px] md:min-h-[400px] lg:min-h-[500px] flex items-center"
+      className="relative overflow-hidden border p-8 md:p-12 lg:p-16 mb-8 min-h-[540px] md:min-h-[600px] lg:min-h-[720px] xl:min-h-[800px] flex items-center"
       style={{ borderColor: '#1F2633' }}
     >
       {/* 背景画像レイヤー */}
