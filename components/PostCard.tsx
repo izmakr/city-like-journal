@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { BookmarkButton } from './BookmarkButton';
 import { Chip } from './Chip';
 import { CalendarIcon } from './icons';
 import type { Post } from '@/lib/types';
@@ -18,6 +19,9 @@ export function PostCard({ post }: { post: Post }) {
           className="object-cover"
           sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 90vw"
         />
+        <div className="absolute top-2 right-2">
+          <BookmarkButton postId={post.id} postTitle={post.title} />
+        </div>
       </div>
       <div className="p-4">
         <div className="flex items-center gap-2 text-xs text-gray-400">

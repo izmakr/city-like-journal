@@ -201,6 +201,7 @@ export function Header() {
               >
                 <nav className="flex flex-col">
                   <Link href="/" className="px-4 py-2.5 rounded-lg hover:bg-[#131823] whitespace-nowrap transition-colors" onClick={() => setMenuOpen(false)}>ホーム</Link>
+                  <Link href="/bookmarks" className="px-4 py-2.5 rounded-lg hover:bg-[#131823] whitespace-nowrap transition-colors" onClick={() => setMenuOpen(false)}>お気に入り一覧</Link>
                   <Link href="/tokyo/" className="px-4 py-2.5 rounded-lg hover:bg-[#131823] whitespace-nowrap transition-colors" onClick={() => setMenuOpen(false)}>エリア一覧</Link>
                   <Link href="/category/" className="px-4 py-2.5 rounded-lg hover:bg-[#131823] whitespace-nowrap transition-colors" onClick={() => setMenuOpen(false)}>カテゴリ一覧</Link>
                 </nav>

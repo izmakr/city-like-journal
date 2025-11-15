@@ -56,4 +56,34 @@ export const CloseIcon = createIcon(
 
 export const ChevronDownIcon = createIcon(<path d="m6 9 6 6 6-6" />);
 
+export const BookmarkIcon = createIcon(
+  <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />,
+);
+
+// フィル版のブックマークアイコン（塗りつぶし）
+const createFilledIcon = (paths: ReactNode) => {
+  const Icon = ({ width = 24, height = 24, ...rest }: IconProps) => (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...rest}
+    >
+      {paths}
+    </svg>
+  );
+  Icon.displayName = 'FilledIcon';
+  return Icon;
+};
+
+export const BookmarkFilledIcon = createFilledIcon(
+  <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />,
+);
+
 

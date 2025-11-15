@@ -8,6 +8,7 @@ import { Chip } from '@/components/Chip';
 import { LazyPostRouteMap } from '@/components/LazyPostRouteMap';
 import { PostCard } from '@/components/PostCard';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { BookmarkButton } from '@/components/BookmarkButton';
 import { getRelatedPosts } from '@/lib/postRecommendations';
 import {
   buildPostMetaDescription,
@@ -114,7 +115,12 @@ export default async function PostPage(
         fetchPriority="high"
         sizes="(min-width: 1024px) 768px, 100vw"
       />
-      <h1 className="mt-6 text-2xl md:text-3xl font-bold leading-tight">{post.title}</h1>
+      <div className="mt-6 flex items-start justify-between gap-4">
+        <h1 className="text-2xl md:text-3xl font-bold leading-tight flex-1">{post.title}</h1>
+        <div className="flex-shrink-0 pt-1">
+          <BookmarkButton postId={post.id} postTitle={post.title} />
+        </div>
+      </div>
       <div className="mt-3 flex items-center gap-3 flex-wrap">
         <time className="text-xs text-gray-400">{formatPostDate(post.date)}</time>
         <Chip variant="area">{post.area}</Chip>
