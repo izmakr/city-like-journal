@@ -47,7 +47,7 @@ const collectCategories = (): CategoryGroup[] => {
 };
 
 export const metadata: Metadata = {
-  title: 'カテゴリ一覧｜City Like Journal',
+  title: 'カテゴリ一覧',
   description: '東京のカフェ・バー・ダイニングなどカテゴリ別にスポットを一覧表示。City Like Journal が選ぶ大人の行き先ガイド。',
 };
 

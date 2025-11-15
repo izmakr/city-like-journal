@@ -25,12 +25,12 @@ export async function generateMetadata({ params }: { params: Promise<{ area: str
   const posts = getPostsByArea(area);
   if (posts.length === 0) {
     return {
-      title: '東京のスポット｜City Like Journal',
+      title: '東京のスポット',
     };
   }
   const areaName = posts[0].area ?? area;
   return {
-    title: `${areaName}のスポット一覧｜City Like Journal`,
+    title: `${areaName}のスポット一覧`,
     description: `${areaName}で訪れたいカフェ・バー・レストランを厳選。City Like Journal が大人の街歩きをガイドします。`,
   };
 }

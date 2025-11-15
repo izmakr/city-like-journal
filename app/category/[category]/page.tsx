@@ -19,12 +19,12 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   const posts = getPostsByCategory(category);
   if (posts.length === 0) {
     return {
-      title: 'カテゴリ一覧｜City Like Journal',
+      title: 'カテゴリ一覧',
     };
   }
   const categoryLabel = getPrimaryCategoryLabel(posts[0]);
   return {
-    title: `${categoryLabel}特集｜City Like Journal`,
+    title: `${categoryLabel}特集`,
     description: `東京で楽しむ${categoryLabel}を厳選。シーンに合わせて訪れたいスポットをまとめました。`,
   };
 }

@@ -8,7 +8,7 @@ import { CITY_SLUG } from '@/lib/postUtils';
 export const dynamic = 'error';
 
 export const metadata: Metadata = {
-  title: '東京のスポット一覧｜City Like Journal',
+  title: '東京のスポット一覧',
   description: '東京のエリア別・カテゴリ別に厳選スポットを紹介。渋谷、表参道、銀座など大人の街歩きに似合う場所をまとめています。',
 };
 

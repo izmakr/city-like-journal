@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     default: '東京のカフェ・バー案内',
     template: '%s｜City Like Journal',
   },
-  description: '都市の&ldquo;好き&rdquo;を、気ままにアーカイブする',
+  description: '「行きたい」が、気分で見つかるプレイスセレクション',
   metadataBase: new URL('https://citylikejournal.com'),
   openGraph: {
-    title: '東京のカフェ・バー案内｜City Like Journal',
-    description: '都市の"好き"を、気ままにアーカイブする',
+    title: 'City Like Journal｜東京のカフェ・バー案内',
+    description: '「行きたい」が、気分で見つかるプレイスセレクション',
     url: 'https://citylikejournal.com',
     siteName: 'City Like Journal',
     images: [
@@ -38,8 +38,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: '東京のカフェ・バー案内｜City Like Journal',
-    description: '都市の"好き"を、気ままにアーカイブする',
+    title: 'City Like Journal｜東京のカフェ・バー案内',
+    description: '「行きたい」が、気分で見つかるプレイスセレクション',
     images: ['/images/common/CLJ_OGP.png'],
   },
   manifest: '/manifest.json',

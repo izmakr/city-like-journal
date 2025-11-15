@@ -25,13 +25,13 @@ export async function generateMetadata(
   const posts = getPostsByAreaAndCategory(area, category);
   if (posts.length === 0) {
     return {
-      title: '東京のスポット｜City Like Journal',
+      title: '東京のスポット',
     };
   }
   const areaName = posts[0].area ?? area;
   const categoryLabel = getPrimaryCategoryLabel(posts[0]);
   return {
-    title: `${areaName}の${categoryLabel}一覧｜City Like Journal`,
+    title: `${areaName}の${categoryLabel}一覧`,
     description: `${areaName}で楽しむ${categoryLabel}を特集。City Like Journal が厳選したスポットをまとめました。`,
   };
 }
