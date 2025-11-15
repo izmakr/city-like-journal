@@ -81,7 +81,20 @@ export function HeroSection() {
         <span className="inline-block text-xs sm:text-sm" style={{ color: '#9AA7B2' }}>
           都市の&ldquo;好き&rdquo;を、気ままにアーカイブする
         </span>
-        <h1 className="mt-4 sm:mt-6 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
+        <h1 
+          className="mt-4 sm:mt-6 text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight"
+          style={{
+            fontFamily: 'var(--font-cormorant), serif',
+            lineHeight: '1.3',
+            background: 'linear-gradient(135deg, #ffffff 0%, #f5f5f5 40%, #e0e0e0 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            color: '#ffffff',
+            textShadow: '0 2px 10px rgba(0, 0, 0, 0.2), 0 4px 20px rgba(0, 0, 0, 0.12), 0 8px 40px rgba(0, 0, 0, 0.08)',
+            filter: 'drop-shadow(0 2px 10px rgba(0, 0, 0, 0.2)) drop-shadow(0 4px 20px rgba(0, 0, 0, 0.12)) drop-shadow(0 8px 40px rgba(0, 0, 0, 0.08))'
+          }}
+        >
           City Like Journal
         </h1>
         <p className="mt-4 sm:mt-6 text-sm sm:text-base text-gray-300 max-w-xl mx-auto">

@@ -1,9 +1,17 @@
 import type { Metadata, Viewport } from 'next';
+import { Cormorant_Garamond } from 'next/font/google';
 
 import { Header } from '@/components/Header';
 import { BookmarkProvider } from '@/contexts/BookmarkContext';
 import { SearchProvider } from '@/contexts/SearchContext';
 import './globals.css';
+
+const cormorant = Cormorant_Garamond({ 
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-cormorant',
+});
 
 export const metadata: Metadata = {
   title: {
@@ -40,7 +48,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja" suppressHydrationWarning>
+    <html lang="ja" className={cormorant.variable} suppressHydrationWarning>
       <body className="min-h-screen" style={{ backgroundColor: '#0B0E13', color: '#E6EAF2' }} suppressHydrationWarning>
         <BookmarkProvider>
           <SearchProvider>
