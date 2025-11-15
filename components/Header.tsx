@@ -16,16 +16,17 @@ export function Header() {
   const { searchQuery, setSearchQuery } = useSearch();
 
   const handleSearchOpen = () => {
-    import('./SearchBar').then(() => {
-      setSearchOpen(true);
-      // マップへスクロール
-      setTimeout(() => {
-        const mapElement = document.getElementById('spot-map');
-        if (mapElement) {
-          mapElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 100);
-    });
+    // まずマップへスクロール
+    const mapElement = document.getElementById('spot-map');
+    if (mapElement) {
+      mapElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    // スクロール完了後にモーダルを開く
+    setTimeout(() => {
+      import('./SearchBar').then(() => {
+        setSearchOpen(true);
+      });
+    }, 400); // スムーズスクロールの完了を待つ
   };
 
   const handleSearchClose = () => {
@@ -138,7 +139,7 @@ export function Header() {
             style={{ background: 'rgba(0,0,0,0.5)' }}
           />
           <div
-            className="fixed top-16 left-1/2 -translate-x-1/2 z-50 w-full max-w-xl mx-4"
+            className="fixed top-16 left-1/2 -translate-x-1/2 z-50 w-full max-w-xl px-4"
           >
             <div className="relative bg-[#0B0E13] rounded-xl border p-4 shadow-lg" style={{ borderColor: '#1F2633' }}>
               <div className="flex items-center gap-2">
