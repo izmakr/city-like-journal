@@ -52,7 +52,7 @@ export const LazyMapView = (props: MapViewProps) => {
   }, [shouldRender]);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} id="spot-map">
       {shouldRender ? <DynamicMapView {...props} /> : <MapViewSkeleton />}
     </div>
   );

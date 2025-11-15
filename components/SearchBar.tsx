@@ -9,11 +9,13 @@ export function SearchBar({
   onChange,
   placeholder,
   inputRef,
+  onEnter,
 }: {
   q: string;
   onChange: (v: string) => void;
   placeholder?: string;
   inputRef?: RefObject<HTMLInputElement | null>;
+  onEnter?: () => void;
 }) {
   return (
     <div className="relative">
@@ -21,6 +23,11 @@ export function SearchBar({
         ref={inputRef}
         value={q}
         onChange={(e) => onChange(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && onEnter) {
+            onEnter();
+          }
+        }}
         placeholder={placeholder ?? 'スポット名・エリア・カテゴリで検索'}
         className="w-full rounded-xl bg-[#131823] border px-4 py-3 pl-10 text-sm md:text-base outline-none focus:ring-2 focus:ring-[#2A4A6B] focus:border-[#2A4A6B]"
         style={{ borderColor: '#1F2633' }}

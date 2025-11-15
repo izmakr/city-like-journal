@@ -15,6 +15,28 @@ export function Header() {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const { searchQuery, setSearchQuery } = useSearch();
 
+  const handleSearchOpen = () => {
+    import('./SearchBar').then(() => {
+      setSearchOpen(true);
+      // マップへスクロール
+      setTimeout(() => {
+        const mapElement = document.getElementById('spot-map');
+        if (mapElement) {
+          mapElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    });
+  };
+
+  const handleSearchClose = () => {
+    setSearchOpen(false);
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    setSearchOpen(false);
+  };
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -57,11 +79,38 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-2">
+          {/* 検索中の表示 */}
+          {searchQuery && (
+            <>
+              {/* PC版：アイコン付き */}
+              <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#131823] border text-xs" style={{ borderColor: '#1F2633' }}>
+                <SearchIcon width={14} height={14} className="text-[#9AA7B2]" />
+                <span className="text-[#E6EAF2] max-w-[120px] truncate">{searchQuery}</span>
+                <button
+                  onClick={handleClearSearch}
+                  className="ml-1 text-[#9AA7B2] hover:text-[#E6EAF2] transition-colors"
+                  aria-label="検索をクリア"
+                >
+                  <CloseIcon width={12} height={12} />
+                </button>
+              </div>
+              {/* スマホ版：コンパクト */}
+              <div className="flex sm:hidden items-center gap-1 px-2 py-1 rounded-lg bg-[#131823] border text-xs" style={{ borderColor: '#1F2633' }}>
+                <span className="text-[#E6EAF2] max-w-[60px] truncate">{searchQuery}</span>
+                <button
+                  onClick={handleClearSearch}
+                  className="text-[#9AA7B2] hover:text-[#E6EAF2] transition-colors"
+                  aria-label="検索をクリア"
+                >
+                  <CloseIcon width={12} height={12} />
+                </button>
+              </div>
+            </>
+          )}
+
           <button
             aria-label="検索"
-            onClick={() => {
-              import('./SearchBar').then(() => setSearchOpen(true));
-            }}
+            onClick={handleSearchOpen}
             className="h-9 w-9 inline-flex items-center justify-center rounded-lg border flex-shrink-0 transition-colors hover:bg-[#131823]"
             style={{ borderColor: '#1F2633' }}
           >
@@ -85,7 +134,7 @@ export function Header() {
         <>
           <div
             className="fixed inset-0 z-40 transition-opacity duration-200 opacity-100"
-            onClick={() => setSearchOpen(false)}
+            onClick={handleSearchClose}
             style={{ background: 'rgba(0,0,0,0.5)' }}
           />
           <div
@@ -94,16 +143,33 @@ export function Header() {
             <div className="relative bg-[#0B0E13] rounded-xl border p-4 shadow-lg" style={{ borderColor: '#1F2633' }}>
               <div className="flex items-center gap-2">
                 <div className="flex-1">
-                  <SearchBar q={searchQuery} onChange={setSearchQuery} inputRef={searchInputRef} />
+                  <SearchBar 
+                    q={searchQuery} 
+                    onChange={setSearchQuery} 
+                    inputRef={searchInputRef}
+                    onEnter={handleSearchClose}
+                  />
                 </div>
                 <button
-                  onClick={() => setSearchOpen(false)}
+                  onClick={handleSearchClose}
                   className="h-9 w-9 inline-flex items-center justify-center rounded-lg border flex-shrink-0 transition-colors hover:bg-[#131823]"
                   style={{ borderColor: '#1F2633' }}
+                  title="閉じる (Esc)"
                 >
                   <CloseIcon width={18} height={18} />
                 </button>
               </div>
+              {searchQuery && (
+                <div className="mt-3 flex items-center justify-between text-xs text-[#9AA7B2]">
+                  <span>「{searchQuery}」で検索中</span>
+                  <button
+                    onClick={handleClearSearch}
+                    className="text-[#9AA7B2] hover:text-[#E6EAF2] underline transition-colors"
+                  >
+                    クリア
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </>
