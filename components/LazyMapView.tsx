@@ -33,14 +33,14 @@ export const LazyMapView = (props: MapViewProps) => {
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
-        if (entry?.isIntersecting) {
+        if (entry && entry.intersectionRatio >= 0.35) {
           setShouldRender(true);
           observer.disconnect();
         }
       },
       {
-        rootMargin: "200px 0px",
-        threshold: 0.1,
+        rootMargin: "0px 0px -25% 0px",
+        threshold: [0, 0.25, 0.35, 0.5, 1],
       },
     );
 
