@@ -69,10 +69,44 @@ export async function generateMetadata(
   const resolved = await params;
   const post = findPostByParams(resolved);
 
+  if (!post) {
+    return {
+      title: '東京 スポット 特集',
+    };
+  }
+
+  const title = createPostTitle(post);
+  const description = buildPostMetaDescription(post);
+  const url = new URL(post.permalink, SITE_ORIGIN).toString();
+  const ogImage = new URL(post.cover, SITE_ORIGIN).toString();
+
   return {
-    title: createPostTitle(post),
-    description: post ? buildPostMetaDescription(post) : undefined,
-    alternates: post ? { canonical: new URL(post.permalink, SITE_ORIGIN).toString() } : undefined,
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title: post.title,
+      description,
+      url,
+      siteName: 'City Like Journal',
+      images: [
+        {
+          url: ogImage,
+          width: 1280,
+          height: 800,
+          alt: post.title,
+        },
+      ],
+      locale: 'ja_JP',
+      type: 'article',
+      publishedTime: post.date,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description,
+      images: [ogImage],
+    },
   };
 }
 
