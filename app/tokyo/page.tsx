@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAreaGroupSummaries, getPosts } from '@/lib/data';
 import { PostCard } from '@/components/PostCard';
+import { Footer } from '@/components/Footer';
 import { CITY_SLUG } from '@/lib/postUtils';
 
 export const dynamic = 'error';
@@ -18,6 +19,7 @@ export default function TokyoIndexPage() {
   const latestPosts = getLatestPosts();
 
   return (
+    <>
     <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12">
       <header className="mb-12 space-y-4">
         <p className="text-sm uppercase tracking-widest text-[#9AA7B2]">Tokyo Guide</p>
@@ -68,6 +70,8 @@ export default function TokyoIndexPage() {
         </div>
       </section>
     </main>
+    <Footer />
+    </>
   );
 }
 

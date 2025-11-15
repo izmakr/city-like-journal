@@ -4,6 +4,7 @@ import Script from 'next/script';
 import { getCategorySlugs, getPostsByCategory } from '@/lib/data';
 import { PostCard } from '@/components/PostCard';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { Footer } from '@/components/Footer';
 import { buildBreadcrumbStructuredData, buildCategoryBreadcrumbItems, getPrimaryCategoryLabel } from '@/lib/postUtils';
 
 export const dynamic = 'error';
@@ -44,6 +45,7 @@ export default async function CategoryDetailPage({ params }: { params: Promise<{
   const structuredData = buildBreadcrumbStructuredData(breadcrumbItems);
 
   return (
+    <>
     <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12">
       <Script
         id={`category-detail-${category}`}
@@ -86,6 +88,8 @@ export default async function CategoryDetailPage({ params }: { params: Promise<{
         </div>
       </section>
     </main>
+    <Footer />
+    </>
   );
 }
 

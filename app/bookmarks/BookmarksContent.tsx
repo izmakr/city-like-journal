@@ -18,10 +18,10 @@ export function BookmarksContent({ posts }: BookmarksContentProps) {
   }, [bookmarks, posts]);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8">
-      <div className="mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold">お気に入り</h1>
-        <p className="mt-2 text-sm text-gray-400">
+    <>
+      <div className="mb-12">
+        <h1 className="text-3xl font-semibold text-[#E6EAF2]">お気に入り</h1>
+        <p className="mt-3 text-sm text-gray-400">
           {bookmarkedPosts.length > 0
             ? `${bookmarkedPosts.length}件の記事をお気に入り登録しています`
             : 'お気に入り登録した記事はありません'}
@@ -57,7 +57,7 @@ export function BookmarksContent({ posts }: BookmarksContentProps) {
           </p>
         </div>
       )}
-    </div>
+    </>
   );
 }
 

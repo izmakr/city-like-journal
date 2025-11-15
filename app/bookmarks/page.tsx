@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 
 import { BookmarksContent } from './BookmarksContent';
+import { Footer } from '@/components/Footer';
 import { POSTS } from '@/lib/data';
 
 export const metadata: Metadata = {
@@ -9,6 +10,13 @@ export const metadata: Metadata = {
 };
 
 export default function BookmarksPage() {
-  return <BookmarksContent posts={POSTS} />;
+  return (
+    <>
+      <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12 min-h-[calc(100vh-10rem)]">
+        <BookmarksContent posts={POSTS} />
+      </main>
+      <Footer />
+    </>
+  );
 }
 

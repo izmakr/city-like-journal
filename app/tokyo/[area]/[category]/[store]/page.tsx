@@ -9,6 +9,7 @@ import { LazyPostRouteMap } from '@/components/LazyPostRouteMap';
 import { PostCard } from '@/components/PostCard';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { BookmarkButton } from '@/components/BookmarkButton';
+import { Footer } from '@/components/Footer';
 import { getRelatedPosts } from '@/lib/postRecommendations';
 import {
   buildPostMetaDescription,
@@ -88,6 +89,7 @@ export default async function PostPage(
   const breadcrumbStructuredData = buildBreadcrumbStructuredData(breadcrumbItems);
 
   return (
+    <>
     <article className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
       <Script
         id={`structured-data-${post.id}`}
@@ -148,6 +150,8 @@ export default async function PostPage(
         </section>
       )}
     </article>
+    <Footer />
+    </>
   );
 }
 

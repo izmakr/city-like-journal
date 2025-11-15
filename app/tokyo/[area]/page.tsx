@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getAreaSlugs, getPostsByArea } from '@/lib/data';
 import { PostCard } from '@/components/PostCard';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { Footer } from '@/components/Footer';
 import {
   CITY_SLUG,
   buildBreadcrumbStructuredData,
@@ -59,6 +60,7 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
   const structuredData = buildBreadcrumbStructuredData(breadcrumbItems);
 
   return (
+    <>
     <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12">
       <Script
         id={`area-breadcrumb-${area}`}
@@ -102,6 +104,8 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
         </div>
       </section>
     </main>
+    <Footer />
+    </>
   );
 }
 

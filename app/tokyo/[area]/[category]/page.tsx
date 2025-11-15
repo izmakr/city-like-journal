@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getAreaCategoryCombos, getPostsByAreaAndCategory } from '@/lib/data';
 import { PostCard } from '@/components/PostCard';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { Footer } from '@/components/Footer';
 import {
   buildBreadcrumbStructuredData,
   buildAreaCategoryBreadcrumbItems,
@@ -50,6 +51,7 @@ export default async function AreaCategoryPage(
   const structuredData = buildBreadcrumbStructuredData(breadcrumbItems);
 
   return (
+    <>
     <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12">
       <Script
         id={`area-category-breadcrumb-${area}-${category}`}
@@ -76,6 +78,8 @@ export default async function AreaCategoryPage(
         </div>
       </section>
     </main>
+    <Footer />
+    </>
   );
 }
 

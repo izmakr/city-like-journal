@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Script from 'next/script';
 import { getPosts } from '@/lib/data';
+import { Footer } from '@/components/Footer';
 import { buildBreadcrumbStructuredData } from '@/lib/postUtils';
 import { CATEGORY_DEFINITIONS } from '@/lib/categories';
 
@@ -59,6 +60,7 @@ export default function CategoryIndexPage() {
   const structuredData = buildBreadcrumbStructuredData(breadcrumbItems);
 
   return (
+    <>
     <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12">
       <Script
         id="category-breadcrumbs"
@@ -100,6 +102,8 @@ export default function CategoryIndexPage() {
         ))}
       </section>
     </main>
+    <Footer />
+    </>
   );
 }
 
