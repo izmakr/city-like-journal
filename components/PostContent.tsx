@@ -11,14 +11,15 @@ export function PostContent({ content }: PostContentProps) {
     // まず、・で始まる行（店舗情報）を検出
     const lines = text.split('\n');
     const blocks: Array<{ 
-      type: 'paragraph' | 'table' | 'heading' | 'image' | 'video'; 
-      content: string | Array<{ key: string; value: string }>; 
+      type: 'paragraph' | 'table' | 'heading' | 'image' | 'video' | 'list';
+      content: string | Array<{ key: string; value: string }> | string[];
       level?: number;
       url?: string;
       alt?: string;
     }> = [];
     let currentParagraph: string[] = [];
     let currentTable: Array<{ key: string; value: string }> = [];
+    let currentList: string[] = [];
 
     const flushParagraph = () => {
       if (currentParagraph.length > 0) {
@@ -34,12 +35,20 @@ export function PostContent({ content }: PostContentProps) {
       }
     };
 
+    const flushList = () => {
+      if (currentList.length > 0) {
+        blocks.push({ type: 'list', content: currentList });
+        currentList = [];
+      }
+    };
+
     for (const line of lines) {
       const trimmed = line.trim();
-      
+
       // 空行の場合は段落を区切る
       if (trimmed === '') {
         flushTable();
+        flushList();
         flushParagraph();
         continue;
       }
@@ -47,6 +56,7 @@ export function PostContent({ content }: PostContentProps) {
       // 見出し（## または ###）を検出
       if (trimmed.startsWith('##')) {
         flushTable();
+        flushList();
         flushParagraph();
         const level = trimmed.match(/^#+/)?.[0].length || 2;
         const headingText = trimmed.replace(/^#+\s*/, '');
@@ -59,6 +69,7 @@ export function PostContent({ content }: PostContentProps) {
       const imageSimpleMatch = trimmed.match(/^\[img:([^\]]+)(?::([^\]]+))?\]$/);
       if (imageMarkdownMatch || imageSimpleMatch) {
         flushTable();
+        flushList();
         flushParagraph();
         const match = imageMarkdownMatch || imageSimpleMatch;
         if (match) {
@@ -73,41 +84,41 @@ export function PostContent({ content }: PostContentProps) {
       const videoMatch = trimmed.match(/^\[video:([^\]]+)(?::([^\]]+))?\]$/);
       if (videoMatch) {
         flushTable();
+        flushList();
         flushParagraph();
         blocks.push({ type: 'video', content: '', url: videoMatch[1], alt: videoMatch[2] || '' });
         continue;
       }
 
-      // ・で始まる行は店舗情報（テーブル項目）
+      // ・で始まる行の処理
       if (trimmed.startsWith('・')) {
-        flushParagraph();
         const item = trimmed.substring(1).trim(); // 「・」を除去
         
-        // 「:」や「 」で分割してキーとバリューに分ける
-        let key = item;
-        let value = '';
-        
+        // 「:」を含む場合は店舗情報テーブル項目として扱う
         if (item.includes(':')) {
+          flushParagraph();
+          flushList();
+          
           const colonIndex = item.indexOf(':');
-          key = item.substring(0, colonIndex).trim();
-          value = item.substring(colonIndex + 1).trim();
-        } else if (item.includes(' ')) {
-          // スペースで区切られている場合（例：「電源/WiFi ◯」）
-          const parts = item.split(/\s+/);
-          if (parts.length >= 2) {
-            key = parts.slice(0, -1).join(' ');
-            value = parts[parts.length - 1];
-          }
+          const key = item.substring(0, colonIndex).trim();
+          const value = item.substring(colonIndex + 1).trim();
+          
+          currentTable.push({ key, value });
+        } else {
+          // 「:」を含まない場合は通常の箇条書きとして扱う
+          flushParagraph();
+          flushTable();
+          currentList.push(item);
         }
-        
-        currentTable.push({ key, value });
       } else {
         flushTable();
+        flushList();
         currentParagraph.push(line);
       }
     }
 
     flushTable();
+    flushList();
     flushParagraph();
 
     return blocks;
@@ -164,8 +175,8 @@ export function PostContent({ content }: PostContentProps) {
         } else if (block.type === 'table') {
           const tableData = block.content as Array<{ key: string; value: string }>;
           return (
-            <div key={blockIndex} className="overflow-hidden rounded-xl border" style={{ borderColor: '#1F2633', background: '#131823' }}>
-              <table className="w-full border-collapse">
+            <div key={blockIndex} className="overflow-x-auto rounded-xl border" style={{ borderColor: '#1F2633', background: '#131823' }}>
+              <table className="w-full border-collapse min-w-full">
                 <tbody>
                   {tableData.map((row, rowIndex) => {
                     const isAddress = row.key === '住所';
@@ -179,20 +190,20 @@ export function PostContent({ content }: PostContentProps) {
                         className={rowIndex < tableData.length - 1 ? 'border-b' : ''}
                         style={{ borderColor: '#1F2633' }}
                       >
-                        <td className="py-3 px-3 sm:px-4 text-sm font-medium text-gray-300 align-top w-[35%] sm:w-[40%]">
+                        <td className="py-3 px-3 sm:px-4 text-sm font-medium text-gray-300 align-top w-[35%] sm:w-[40%] whitespace-nowrap">
                           {renderText(row.key)}
                         </td>
-                        <td className="py-3 px-3 sm:px-4 text-sm text-gray-200 align-top">
+                        <td className="py-3 px-3 sm:px-4 text-sm text-gray-200 align-top break-words">
                           {isAddress && googleMapsUrl ? (
                             <a
                               href={googleMapsUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="hover:text-[#7DB3D3] hover:underline transition-colors cursor-pointer inline-flex items-center gap-1"
+                              className="hover:text-[#7DB3D3] hover:underline transition-colors cursor-pointer inline-flex items-center gap-1 break-all"
                             >
                               {renderText(row.value || '')}
                               <svg
-                                className="w-3.5 h-3.5 inline-block"
+                                className="w-3.5 h-3.5 inline-block flex-shrink-0"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -215,6 +226,18 @@ export function PostContent({ content }: PostContentProps) {
                 </tbody>
               </table>
             </div>
+          );
+        } else if (block.type === 'list') {
+          const listItems = block.content as string[];
+          return (
+            <ul key={blockIndex} className="space-y-2 list-none pl-0">
+              {listItems.map((item, itemIndex) => (
+                <li key={itemIndex} className="flex items-start text-[14px] sm:text-[15px] text-gray-200 leading-7 sm:leading-8">
+                  <span className="mr-2 mt-0.5 text-gray-400">・</span>
+                  <span className="flex-1">{renderText(item)}</span>
+                </li>
+              ))}
+            </ul>
           );
         } else if (block.type === 'image') {
           return (
