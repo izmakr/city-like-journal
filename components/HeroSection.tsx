@@ -98,7 +98,7 @@ export function HeroSection() {
           City Like Journal
         </h1>
         <p className="mt-4 sm:mt-6 text-sm sm:text-base text-gray-300 max-w-xl mx-auto">
-          行きたい場所が、気分で見つかる&ldquo;東京メディア&rdquo;
+          「行きたい」が、気分で見つかるプレイスセレクション
         </p>
       </div>
 
