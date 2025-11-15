@@ -288,16 +288,16 @@ export function PostRouteMap({ post }: PostRouteMapProps) {
         )}
         {isReady && (
           <div 
-            className="absolute top-4 left-4 max-w-xs z-10 rounded-2xl p-4 shadow-xl border backdrop-blur-md"
+            className="absolute top-4 left-4 max-w-xs z-10 rounded-2xl p-3 md:p-4 shadow-xl border backdrop-blur-md"
             style={{ 
               background: 'rgba(15, 22, 36, 0.95)', 
               borderColor: 'rgba(127, 180, 255, 0.25)',
               boxShadow: '0 24px 40px rgba(7, 10, 16, 0.55)'
             }}
           >
-            <h3 className="font-semibold text-[#E6EAF2] text-sm mb-2">{post.storeName}</h3>
+            <h3 className="hidden md:block font-semibold text-[#E6EAF2] text-sm mb-2">{post.storeName}</h3>
             {post.address && (
-              <p className="text-xs text-[#9AA7B2] mb-3 leading-relaxed">{post.address}</p>
+              <p className="hidden md:block text-xs text-[#9AA7B2] mb-3 leading-relaxed">{post.address}</p>
             )}
             <a
               href={googleMapsUrl}
