@@ -109,7 +109,7 @@ export default async function PostPage(
         alt={post.title}
         width={1280}
         height={800}
-        className="w-full h-auto rounded-2xl border"
+        className="w-full h-auto border"
         style={{ borderColor: '#1F2633' }}
         priority
         fetchPriority="high"
