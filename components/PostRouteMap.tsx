@@ -4,8 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { FeatureCollection, Point } from 'geojson';
 import type { GeoJSONSource, Map as MapLibreMap } from 'maplibre-gl';
 import type { Post } from '@/lib/types';
-import { getMarkerSymbolDataURL, getMarkerVisual, getStationSymbolDataURL } from '@/lib/mapMarkers';
-import { getStationCoordinates } from '@/lib/stations';
+import { getMarkerSymbolDataURL, getMarkerVisual } from '@/lib/mapMarkers';
 import { collapseAttributionControl } from '@/lib/mapStyles';
 import { ROUTE_MARKER_ICON_SIZE_EXPRESSION } from '@/lib/mapStyleConfig';
 
@@ -30,14 +29,9 @@ export function PostRouteMap({ post }: PostRouteMapProps) {
   const hasLocation =
     post.latitude !== undefined && Number.isFinite(post.latitude) && post.longitude !== undefined &&
     Number.isFinite(post.longitude);
-  const stationCoordinates = useMemo(
-    () => (post.nearestStation ? getStationCoordinates(post.nearestStation) : undefined),
-    [post.nearestStation],
-  );
-  const stationAvailable = hasLocation && post.nearestStation && stationCoordinates;
 
   const { featureCollection, styles } = useMemo(() => {
-    const featureCollection: FeatureCollection<Point, { id: string; iconKey: string; role: 'spot' | 'station' }> = {
+    const featureCollection: FeatureCollection<Point, { id: string; iconKey: string; role: 'spot' }> = {
       type: 'FeatureCollection',
       features: [],
     };
@@ -61,26 +55,8 @@ export function PostRouteMap({ post }: PostRouteMapProps) {
       properties: { id: post.id, iconKey: spotIconKey, role: 'spot' },
     });
 
-    if (stationAvailable && stationCoordinates) {
-      const stationIconKey = `post-${post.id}-station`;
-      markerStyles.set(stationIconKey, {
-        iconKey: stationIconKey,
-        iconType: 'default',
-        color: '#1F2937',
-        dataUrl: getStationSymbolDataURL(),
-      });
-      featureCollection.features.push({
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [stationCoordinates.longitude, stationCoordinates.latitude],
-        },
-        properties: { id: `${post.id}-station`, iconKey: stationIconKey, role: 'station' },
-      });
-    }
-
     return { featureCollection, styles: markerStyles };
-  }, [post, hasLocation, stationAvailable, stationCoordinates]);
+  }, [post, hasLocation]);
 
   useEffect(() => {
     if (!hasLocation) return;
@@ -100,7 +76,7 @@ export function PostRouteMap({ post }: PostRouteMapProps) {
           ? `https://api.maptiler.com/maps/dataviz-dark/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_API_KEY}&language=ja`
           : 'https://demotiles.maplibre.org/style.json',
         center: [post.longitude as number, post.latitude as number],
-        zoom: 15.2,
+        zoom: 15,
         attributionControl: false,
       });
 
@@ -201,8 +177,6 @@ export function PostRouteMap({ post }: PostRouteMapProps) {
     if (!mapRef.current || !isReady || spritesVersion === 0 || !hasLocation) return;
 
     const map = mapRef.current;
-    const maplibregl = mapModuleRef.current;
-    if (!maplibregl) return;
 
     const source = map.getSource(SOURCE_ID) as GeoJSONSource | undefined;
     const cleanup = () => {
@@ -235,7 +209,6 @@ export function PostRouteMap({ post }: PostRouteMapProps) {
         }
       };
 
-      safeRemoveLayer(`${LAYER_ID}-station-label`);
       safeRemoveLayer(LAYER_ID);
       safeRemoveSource(SOURCE_ID);
     };
@@ -258,18 +231,11 @@ export function PostRouteMap({ post }: PostRouteMapProps) {
         },
       });
 
-      if (stationAvailable && stationCoordinates) {
-        const bounds = new maplibregl.LngLatBounds();
-        bounds.extend([post.longitude as number, post.latitude as number]);
-        bounds.extend([stationCoordinates.longitude, stationCoordinates.latitude]);
-        map.fitBounds(bounds, { padding: 120, maxZoom: 16 });
-      } else {
-        map.easeTo({
-          center: [post.longitude as number, post.latitude as number],
-          zoom: 15.2,
-          duration: 800,
-        });
-      }
+      map.easeTo({
+        center: [post.longitude as number, post.latitude as number],
+        zoom: 15.5,
+        duration: 800,
+      });
 
       return cleanup;
     }
@@ -288,56 +254,29 @@ export function PostRouteMap({ post }: PostRouteMapProps) {
         },
       });
     }
-    if (stationAvailable && !map.getLayer(`${LAYER_ID}-station-label`)) {
-      map.addLayer({
-        id: `${LAYER_ID}-station-label`,
-        type: 'symbol',
-        source: SOURCE_ID,
-        filter: ['==', ['get', 'role'], 'station'],
-        layout: {
-          'icon-image': ['get', 'iconKey'],
-          'icon-anchor': 'bottom',
-          'icon-allow-overlap': true,
-          'icon-size': ROUTE_MARKER_ICON_SIZE_EXPRESSION,
-        },
-      });
-    }
 
-    if (stationAvailable && stationCoordinates) {
-      const bounds = new maplibregl.LngLatBounds();
-      bounds.extend([post.longitude as number, post.latitude as number]);
-      bounds.extend([stationCoordinates.longitude, stationCoordinates.latitude]);
-      map.fitBounds(bounds, { padding: 120, maxZoom: 16 });
-    } else {
-      map.easeTo({
-        center: [post.longitude as number, post.latitude as number],
-        zoom: 15.2,
-        duration: 800,
-      });
-    }
+    map.easeTo({
+      center: [post.longitude as number, post.latitude as number],
+      zoom: 15.5,
+      duration: 800,
+    });
 
     return cleanup;
-  }, [featureCollection, hasLocation, isReady, spritesVersion, stationAvailable, stationCoordinates, post]);
+  }, [featureCollection, hasLocation, isReady, spritesVersion, post]);
 
   if (!hasLocation) {
     return null;
   }
 
+  // Google Maps用のURL（店名と住所を使用）
+  const searchQuery = post.address 
+    ? `${post.storeName} ${post.address}`.trim()
+    : post.storeName;
+  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(searchQuery)}`;
+
   return (
     <div className="space-y-3">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-lg font-semibold text-white">アクセスマップ</h2>
-          {post.nearestStation && (
-            <p className="text-xs text-gray-400 mt-1">
-              {post.nearestStation} とスポットの位置関係を表示しています
-            </p>
-          )}
-        </div>
-        {!process.env.NEXT_PUBLIC_MAPTILER_API_KEY && (
-          <p className="text-xs text-amber-400">※MapTiler APIキー未設定のため、デモスタイルで表示中</p>
-        )}
-      </div>
+      <h2 className="text-lg font-semibold text-white">アクセスマップ</h2>
       <div
         ref={containerRef}
         className="relative h-[360px] w-full overflow-hidden rounded-3xl border border-slate-800 bg-slate-900"
@@ -345,6 +284,34 @@ export function PostRouteMap({ post }: PostRouteMapProps) {
         {!isReady && (
           <div className="absolute inset-0 flex items-center justify-center text-sm text-gray-400">
             マップを読み込み中…
+          </div>
+        )}
+        {isReady && (
+          <div 
+            className="absolute top-4 left-4 max-w-xs z-10 rounded-2xl p-4 shadow-xl border backdrop-blur-md"
+            style={{ 
+              background: 'rgba(15, 22, 36, 0.95)', 
+              borderColor: 'rgba(127, 180, 255, 0.25)',
+              boxShadow: '0 24px 40px rgba(7, 10, 16, 0.55)'
+            }}
+          >
+            <h3 className="font-semibold text-[#E6EAF2] text-sm mb-2">{post.storeName}</h3>
+            {post.address && (
+              <p className="text-xs text-[#9AA7B2] mb-3 leading-relaxed">{post.address}</p>
+            )}
+            <a
+              href={googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#7FB4FF] text-xs font-medium hover:text-[#93c6ff] transition-colors inline-flex items-center gap-1"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+              拡大地図を表示
+            </a>
           </div>
         )}
       </div>
