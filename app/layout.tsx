@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 
 import { Header } from '@/components/Header';
+import { BookmarkProvider } from '@/contexts/BookmarkContext';
 import { SearchProvider } from '@/contexts/SearchContext';
 import './globals.css';
 
@@ -41,12 +42,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja" suppressHydrationWarning>
       <body className="min-h-screen" style={{ backgroundColor: '#0B0E13', color: '#E6EAF2' }} suppressHydrationWarning>
-        <SearchProvider>
-          <Header />
-          <div className="pt-16">
-            {children}
-          </div>
-        </SearchProvider>
+        <BookmarkProvider>
+          <SearchProvider>
+            <Header />
+            <div className="pt-16">
+              {children}
+            </div>
+          </SearchProvider>
+        </BookmarkProvider>
       </body>
     </html>
   );
