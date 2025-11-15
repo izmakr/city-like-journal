@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <BookmarkProvider>
           <SearchProvider>
             <Header />
-            <div className="pt-16">
+            <div className="pt-14">
               {children}
             </div>
           </SearchProvider>

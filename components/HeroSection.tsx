@@ -35,10 +35,20 @@ export function HeroSection() {
     return () => clearInterval(timer);
   }, []);
 
+  const handleScrollToContent = () => {
+    const mainContent = document.querySelector('main');
+    if (mainContent) {
+      mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <section
-      className="relative overflow-hidden border p-8 md:p-12 lg:p-16 mb-8 min-h-[540px] md:min-h-[600px] lg:min-h-[720px] xl:min-h-[800px] flex items-center"
-      style={{ borderColor: '#1F2633' }}
+      className="relative overflow-hidden flex items-center justify-center"
+      style={{
+        height: 'calc(100vh - 56px)', // ヘッダーの高さ(h-14 = 56px)を引く
+        minHeight: '500px', // 最小高さを確保
+      }}
     >
       {/* 背景画像レイヤー */}
       <div className="absolute inset-0">
@@ -57,21 +67,82 @@ export function HeroSection() {
               priority={index === 0}
               fetchPriority={index === 0 ? 'high' : 'auto'}
               loading={index === 0 ? 'eager' : 'lazy'}
-              sizes="(min-width: 1280px) 1200px, (min-width: 1024px) 90vw, (min-width: 768px) 95vw, 100vw"
+              sizes="100vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#13182333] to-[#0b0e13e6]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#13182333] via-[#0b0e1366] to-[#0b0e13e6]" />
           </div>
         ))}
       </div>
 
       {/* コンテンツ */}
-      <div className="relative max-w-2xl w-full">
-        <span className="text-xs px-2 py-1 rounded-md" style={{ color: '#9AA7B2' }}>都市の&ldquo;好き&rdquo;を、気ままにアーカイブする</span>
-        <h1 className="mt-3 text-3xl md:text-4xl font-bold tracking-tight">City Like Journal</h1>
-        <p className="mt-3 text-sm text-gray-300">行きたい場所が、気分で見つかる&ldquo;東京メディア&rdquo;</p>
+      <div className="relative z-10 px-4 sm:px-6 lg:px-8 text-center max-w-3xl mx-auto">
+        <span className="inline-block text-xs sm:text-sm" style={{ color: '#9AA7B2' }}>
+          都市の&ldquo;好き&rdquo;を、気ままにアーカイブする
+        </span>
+        <h1 className="mt-4 sm:mt-6 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
+          City Like Journal
+        </h1>
+        <p className="mt-4 sm:mt-6 text-sm sm:text-base text-gray-300 max-w-xl mx-auto">
+          行きたい場所が、気分で見つかる&ldquo;東京メディア&rdquo;
+        </p>
       </div>
 
+      {/* スクロールボタン */}
+      <button
+        onClick={handleScrollToContent}
+        className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 group cursor-pointer"
+        aria-label="コンテンツへスクロール"
+      >
+        <span className="text-xs text-gray-400 group-hover:text-gray-200 transition-colors tracking-wider">
+          Scroll
+        </span>
+        <div className="flex flex-col gap-1 animate-bounce-slow">
+          <svg
+            className="w-5 h-5 text-gray-400 group-hover:text-gray-200 transition-colors"
+            viewBox="0 0 20 20"
+            fill="none"
+          >
+            <path
+              d="M5 7L10 12L15 7"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <svg
+            className="w-5 h-5 text-gray-400 group-hover:text-gray-200 transition-colors -mt-2"
+            viewBox="0 0 20 20"
+            fill="none"
+          >
+            <path
+              d="M5 7L10 12L15 7"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      </button>
+
+      {/* アニメーション用のスタイル */}
+      <style jsx>{`
+        @keyframes bounce-slow {
+          0%, 100% {
+            transform: translateY(0);
+            opacity: 1;
+          }
+          50% {
+            transform: translateY(4px);
+            opacity: 0.6;
+          }
+        }
+        .animate-bounce-slow {
+          animation: bounce-slow 2s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 }
