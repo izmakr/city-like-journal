@@ -20,6 +20,28 @@ export const metadata: Metadata = {
   },
   description: '都市の&ldquo;好き&rdquo;を、気ままにアーカイブする',
   metadataBase: new URL('https://citylikejournal.com'),
+  openGraph: {
+    title: '東京のカフェ・バー案内｜City Like Journal',
+    description: '都市の"好き"を、気ままにアーカイブする',
+    url: 'https://citylikejournal.com',
+    siteName: 'City Like Journal',
+    images: [
+      {
+        url: '/images/common/CLJ_OGP.png',
+        width: 1200,
+        height: 630,
+        alt: 'City Like Journal',
+      },
+    ],
+    locale: 'ja_JP',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '東京のカフェ・バー案内｜City Like Journal',
+    description: '都市の"好き"を、気ままにアーカイブする',
+    images: ['/images/common/CLJ_OGP.png'],
+  },
   manifest: '/manifest.json',
   icons: {
     icon: [
