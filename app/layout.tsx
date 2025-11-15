@@ -39,8 +39,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja">
-      <body className="min-h-screen" style={{ backgroundColor: '#0B0E13', color: '#E6EAF2' }}>
+    <html lang="ja" suppressHydrationWarning>
+      <body className="min-h-screen" style={{ backgroundColor: '#0B0E13', color: '#E6EAF2' }} suppressHydrationWarning>
         <SearchProvider>
           <Header />
           <div className="pt-16">
