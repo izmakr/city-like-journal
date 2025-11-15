@@ -67,6 +67,7 @@ export function HeroSection() {
               priority={index === 0}
               fetchPriority={index === 0 ? 'high' : 'auto'}
               loading={index === 0 ? 'eager' : 'lazy'}
+              quality={index === 0 ? 100 : 85}
               sizes="100vw"
               className="object-cover"
             />
@@ -76,7 +77,7 @@ export function HeroSection() {
       </div>
 
       {/* コンテンツ */}
-      <div className="relative z-10 px-4 sm:px-6 lg:px-8 text-center max-w-3xl mx-auto">
+      <div className="relative z-10 px-4 sm:px-6 lg:px-8 text-center max-w-3xl mx-auto mb-16 sm:mb-20">
         <span className="inline-block text-xs sm:text-sm" style={{ color: '#9AA7B2' }}>
           都市の&ldquo;好き&rdquo;を、気ままにアーカイブする
         </span>
