@@ -111,14 +111,34 @@ npm run dev
 
 ---
 
-## フィルター & ページング
+## フィルター & ページング & 検索
 
-- `lib/hooks/useMapFilters.ts`  
+- `lib/hooks/useMapFilters.ts`
   - カテゴリ／エリアフィルター、検索語での絞り込みをまとめたカスタムフックです。
   - ポップオーバー UI は `components/PostFilters/FilterPopoverSection.tsx` で共通化しています。
-- `lib/hooks/usePagination.ts`  
+- `lib/hooks/usePagination.ts`
   - ページング状態と URL 同期 (`?page=...`) を担当する再利用可能なフックです。
   - `components/PostList.tsx` で使用しています。
+
+### 検索機能
+
+- **検索UI**: `components/Header.tsx` のヘッダーに検索ボタンを配置
+  - クリックまたは `Cmd+K` / `Ctrl+K` で検索モーダルを表示
+  - 検索中は検索ワードをChipで表示（PC・スマホ両対応）
+- **複数ワード検索（AND検索）対応**
+  - 全角・半角スペースで区切って複数キーワードを入力可能
+  - 例: `渋谷 焼き鳥` → すべてのキーワードを含む記事を検索
+- **検索対象**: `lib/postUtils.ts` の `buildSearchText` 関数で以下を結合
+  - `title` - 記事タイトル
+  - `excerpt` - 記事の要約
+  - `content` - 記事本文全体
+  - `areaGroup` - エリアグループ
+  - `area` - エリア名
+  - `kind` - カテゴリ配列
+- **検索例**
+  - `渋谷 bar` → エリア × カテゴリ
+  - `焼き鳥 テラス` → カテゴリ × 本文キーワード
+  - `リーズナブル 青山 イタリアン` → 複数条件の組み合わせ
 
 ---
 

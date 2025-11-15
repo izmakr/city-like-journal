@@ -28,7 +28,7 @@ export function SearchBar({
             onEnter();
           }
         }}
-        placeholder={placeholder ?? 'スポット名・エリア・カテゴリで検索'}
+        placeholder={placeholder ?? 'スポット名・エリア・カテゴリで検索（複数可）'}
         className="w-full rounded-xl bg-[#131823] border px-4 py-3 pl-10 text-sm md:text-base outline-none focus:ring-2 focus:ring-[#2A4A6B] focus:border-[#2A4A6B]"
         style={{ borderColor: '#1F2633' }}
       />

@@ -122,6 +122,13 @@ export const useMapFilters = (
 
   const normalizedQuery = useMemo(() => searchQuery.trim().toLowerCase(), [searchQuery]);
 
+  // 複数ワード検索：全角・半角スペースで分割してAND検索
+  const searchKeywords = useMemo(() => {
+    if (!normalizedQuery) return [];
+    // 全角・半角スペースで分割し、空文字を除外
+    return normalizedQuery.split(/[\s　]+/).filter(keyword => keyword.length > 0);
+  }, [normalizedQuery]);
+
   const categoryGroups = useMemo(() => {
     const base = categoryDefinitions.map((definition) => definition.group);
     return [ALL, ...base];
@@ -174,7 +181,9 @@ export const useMapFilters = (
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
       const searchText = searchTextById.get(post.id) ?? '';
-      const matchesQuery = !normalizedQuery || searchText.includes(normalizedQuery);
+      // 複数ワード検索：すべてのキーワードが含まれているかチェック（AND検索）
+      const matchesQuery = searchKeywords.length === 0 || 
+        searchKeywords.every(keyword => searchText.includes(keyword));
       const matchesAreaGroup = areaGroup === ALL || post.areaGroup === areaGroup;
       const matchesArea = normalizedArea === ALL || post.area === normalizedArea;
       const matchesCategory =
@@ -185,7 +194,7 @@ export const useMapFilters = (
           : post.kind.includes(normalizedCategory);
       return matchesQuery && matchesAreaGroup && matchesArea && matchesCategory;
     });
-  }, [posts, normalizedQuery, areaGroup, normalizedArea, normalizedCategory, categoryGroup, searchTextById, postGroupsById]);
+  }, [posts, searchKeywords, areaGroup, normalizedArea, normalizedCategory, categoryGroup, searchTextById, postGroupsById]);
 
   const setCategoryGroup = useCallback((value: string) => {
     setCategoryGroupState(value || ALL);
