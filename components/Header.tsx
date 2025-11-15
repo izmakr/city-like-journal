@@ -10,6 +10,7 @@ import { useSearch } from '@/contexts/SearchContext';
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuMounted, setMenuMounted] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const { searchQuery, setSearchQuery } = useSearch();
@@ -34,6 +35,15 @@ export function Header() {
       searchInputRef.current.focus();
     }
   }, [searchOpen]);
+
+  useEffect(() => {
+    if (menuOpen) {
+      setMenuMounted(true);
+    } else {
+      const timer = setTimeout(() => setMenuMounted(false), 200);
+      return () => clearTimeout(timer);
+    }
+  }, [menuOpen]);
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b" style={{ borderColor: '#1F2633', background: 'rgba(11,14,19,0.6)', backdropFilter: 'blur(10px)' }}>
@@ -100,26 +110,36 @@ export function Header() {
       )}
 
       {/* Menu Overlay */}
-      {menuOpen && (
+      {menuMounted && (
         <>
           <div
-            className="fixed inset-0 z-40 transition-opacity duration-200 opacity-100"
+            className="fixed inset-0 z-40 transition-opacity duration-200"
             onClick={() => setMenuOpen(false)}
-            style={{ background: 'rgba(0,0,0,0.3)' }}
+            style={{
+              background: 'rgba(0,0,0,0.3)',
+              opacity: menuOpen ? 1 : 0
+            }}
           />
           {/* Menu panel */}
-          <div
-            className="fixed right-4 top-16 z-50 w-[220px] rounded-xl border p-2 shadow-lg transition-all duration-200 opacity-100 scale-100 translate-y-0"
-            style={{ background: '#0B0E13', borderColor: '#1F2633' }}
-          >
-            <nav className="flex flex-col">
-              <Link href="/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>ホーム</Link>
-              <Link href="/tokyo/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>エリア一覧</Link>
-              <Link href="/category/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>カテゴリ一覧</Link>
-              <Link href="/tokyo/shibuya/cafe/valley-park-stand/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>特別記事1</Link>
-              <Link href="/tokyo/nakameguro/cafe/starbucks-reserve/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>特別記事2</Link>
-              <Link href="/tokyo/ginza/bar-lounge/greyroom/" className="px-3 py-2 rounded-lg hover:bg-[#131823]" onClick={() => setMenuOpen(false)}>特別記事3</Link>
-            </nav>
+          <div className="fixed inset-x-0 top-14 z-50 flex justify-end">
+            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 w-full flex justify-end">
+              <div
+                className="mt-2 w-auto min-w-[160px] rounded-xl border p-2 shadow-lg transition-all duration-200"
+                style={{
+                  background: '#0B0E13',
+                  borderColor: '#1F2633',
+                  opacity: menuOpen ? 1 : 0,
+                  transform: menuOpen ? 'translateY(0) scale(1)' : 'translateY(-8px) scale(0.95)',
+                }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <nav className="flex flex-col">
+                  <Link href="/" className="px-4 py-2.5 rounded-lg hover:bg-[#131823] whitespace-nowrap transition-colors" onClick={() => setMenuOpen(false)}>ホーム</Link>
+                  <Link href="/tokyo/" className="px-4 py-2.5 rounded-lg hover:bg-[#131823] whitespace-nowrap transition-colors" onClick={() => setMenuOpen(false)}>エリア一覧</Link>
+                  <Link href="/category/" className="px-4 py-2.5 rounded-lg hover:bg-[#131823] whitespace-nowrap transition-colors" onClick={() => setMenuOpen(false)}>カテゴリ一覧</Link>
+                </nav>
+              </div>
+            </div>
           </div>
         </>
       )}
