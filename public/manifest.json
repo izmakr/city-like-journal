@@ -1,7 +1,7 @@
 {
   "name": "City Like Journal",
   "short_name": "City Like",
-  "description": "都市の\"好き\"を、気ままにアーカイブする",
+  "description": "「行きたい」が、気分で見つかるプレイスセレクション",
   "theme_color": "#0B0E13",
   "background_color": "#0B0E13",
   "display": "standalone",
