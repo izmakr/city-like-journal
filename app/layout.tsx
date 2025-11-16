@@ -4,6 +4,8 @@ import { Cormorant_Garamond } from 'next/font/google';
 import { Header } from '@/components/Header';
 import { BookmarkProvider } from '@/contexts/BookmarkContext';
 import { SearchProvider } from '@/contexts/SearchContext';
+import { AuthProvider } from '@/contexts/AuthContext';
+import { AuthWrapper } from '@/components/AuthWrapper';
 import './globals.css';
 
 const cormorant = Cormorant_Garamond({ 
@@ -72,14 +74,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja" className={cormorant.variable} suppressHydrationWarning>
       <body className="min-h-screen" style={{ backgroundColor: '#0B0E13', color: '#E6EAF2' }} suppressHydrationWarning>
-        <BookmarkProvider>
-          <SearchProvider>
-            <Header />
-            <div className="pt-14">
-              {children}
-            </div>
-          </SearchProvider>
-        </BookmarkProvider>
+        <AuthProvider>
+          <BookmarkProvider>
+            <SearchProvider>
+              <AuthWrapper>
+                <Header />
+                <div className="pt-14">
+                  {children}
+                </div>
+              </AuthWrapper>
+            </SearchProvider>
+          </BookmarkProvider>
+        </AuthProvider>
       </body>
     </html>
   );
