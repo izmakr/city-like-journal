@@ -5,15 +5,19 @@ import { useEffect, useRef, useState } from 'react';
 
 import { SearchBar } from './SearchBar';
 import { CloseIcon, MenuIcon, SearchIcon } from './icons';
+import { ConfirmDialog } from './ConfirmDialog';
 
 import { useSearch } from '@/contexts/SearchContext';
+import { useAuth } from '@/contexts/AuthContext';
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuMounted, setMenuMounted] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const { searchQuery, setSearchQuery } = useSearch();
+  const { logout } = useAuth();
 
   const handleSearchOpen = () => {
     // まずマップへスクロール
@@ -36,6 +40,21 @@ export function Header() {
   const handleClearSearch = () => {
     setSearchQuery('');
     setSearchOpen(false);
+  };
+
+  const handleLogoutClick = () => {
+    setMenuOpen(false); // メニューを閉じる
+    setLogoutDialogOpen(true);
+  };
+
+  const handleLogoutConfirm = () => {
+    logout();
+    setLogoutDialogOpen(false);
+    setMenuOpen(false);
+  };
+
+  const handleLogoutCancel = () => {
+    setLogoutDialogOpen(false);
   };
 
   useEffect(() => {
@@ -204,7 +223,7 @@ export function Header() {
           <div className="fixed inset-x-0 top-14 z-50 flex justify-end">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 w-full flex justify-end">
               <div
-                className="mt-2 w-auto min-w-[160px] rounded-xl border p-2 shadow-lg transition-all duration-200"
+                className="mt-1 w-auto min-w-[160px] rounded-xl border p-2 shadow-lg transition-all duration-200"
                 style={{
                   background: '#0B0E13',
                   borderColor: '#1F2633',
@@ -218,12 +237,31 @@ export function Header() {
                   <Link href="/bookmarks" className="px-4 py-2.5 rounded-lg hover:bg-[#131823] whitespace-nowrap transition-colors" onClick={() => setMenuOpen(false)}>お気に入り一覧</Link>
                   <Link href="/tokyo/" className="px-4 py-2.5 rounded-lg hover:bg-[#131823] whitespace-nowrap transition-colors" onClick={() => setMenuOpen(false)}>エリア一覧</Link>
                   <Link href="/category/" className="px-4 py-2.5 rounded-lg hover:bg-[#131823] whitespace-nowrap transition-colors" onClick={() => setMenuOpen(false)}>カテゴリ一覧</Link>
+                  <div className="my-1 border-t" style={{ borderColor: '#1F2633' }} />
+                  <button 
+                    onClick={handleLogoutClick}
+                    className="px-4 py-2.5 rounded-lg hover:bg-[#131823] whitespace-nowrap transition-colors text-left text-[#EF4444]"
+                  >
+                    ログアウト
+                  </button>
                 </nav>
               </div>
             </div>
           </div>
         </>
       )}
+
+      {/* Logout Confirmation Dialog */}
+      <ConfirmDialog
+        isOpen={logoutDialogOpen}
+        title="ログアウト"
+        message="ログアウトしますか？次回アクセス時にパスワードの入力が必要になります。"
+        confirmText="ログアウト"
+        cancelText="キャンセル"
+        onConfirm={handleLogoutConfirm}
+        onCancel={handleLogoutCancel}
+        variant="danger"
+      />
     </header>
   );
 }
