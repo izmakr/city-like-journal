@@ -12,6 +12,7 @@
     "geocode:watch": "node scripts/geocode.cjs --watch"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.6.1",
     "maplibre-gl": "^4.7.1",
     "next": "16.0.1",
     "react": "19.2.0",
