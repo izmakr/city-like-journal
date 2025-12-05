@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Cormorant_Garamond } from 'next/font/google';
+import { Analytics } from "@vercel/analytics/next"
 
 import { Header } from '@/components/Header';
 import { BookmarkProvider } from '@/contexts/BookmarkContext';
@@ -80,6 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </SearchProvider>
         </BookmarkProvider>
+        <Analytics />
       </body>
     </html>
   );
